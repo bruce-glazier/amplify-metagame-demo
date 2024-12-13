@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
+export type ExitDirection = 'left' | 'right';
+
 const useOnScreen = (threshold = 0) => {
   const ref = useRef(null); // Reference to the DOM element
   const [isOnScreen, setIsOnScreen] = useState(false);
-  const [exitDirection, setExitDirection] = useState<'left' | 'right'>('right')
+  const [exitDirection, setExitDirection] = useState<ExitDirection>('right')
 
   useEffect(() => {
     const observer = new IntersectionObserver(

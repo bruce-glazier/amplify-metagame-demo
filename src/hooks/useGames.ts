@@ -2,6 +2,7 @@
 import type { Schema } from '../../amplify/data/resource'
 import { generateClient } from 'aws-amplify/data'
 import { useQuery } from '@tanstack/react-query'
+import compact from 'lodash/compact';
 
 const client = generateClient<Schema>();
 
@@ -37,4 +38,5 @@ export const useGames = () => useQuery({
   
         return result.data;
     },
+    select: (s) => compact(s) // Only keep defined values, mostly for typing
 })
