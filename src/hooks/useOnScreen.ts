@@ -11,10 +11,8 @@ const useOnScreen = (threshold = 0) => {
         setIsOnScreen(entry.isIntersecting);
         const rect = entry.boundingClientRect;
         if (rect.right < 0) {
-          console.log('exited left')
           setExitDirection('left')
         } else {
-          console.log('exited right')
           setExitDirection('right')
         }
         // here is where we know that the element stopped being on screen

@@ -15,7 +15,6 @@ export const GameCard = (props: Props) => {
     
     // TODO: Consider hoisting to generic so any component can be passed into Carousel
     useOnToggleToFalse(isOnScreen, () => {
-        console.log(game.name, ' became invisible')
         onItemVisibilityChange?.(exitDirection);
     })
 

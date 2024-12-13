@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Schema } from "../../amplify/data/resource"
 import { GameCard } from "./GameCard";
 import "./GameCarousel.css"
@@ -8,6 +8,7 @@ type Props = {
 }
 
 // TODO: Make this generic, remove <Games> from inner and require it to be passed in as generic
+// TODO: Can this be navigated by keyboard controls? Need to test and improve
 export const GameCarousel = (props: Props) => {
     const { games } = props;
 
@@ -18,7 +19,11 @@ export const GameCarousel = (props: Props) => {
     const [left, setLeft] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [isMovingLeft, setIsMovingLeft] = useState(false);
-  
+    // const [totalX, setTotalX] = useState(0);
+    //const [currVelocity, setCurrVelocity] = useState(0);
+    const velocityRef = useRef(0);
+    const totalXRef = useRef(0);
+
     const rotateLeft = () => {
         setOrders((orders) => [...orders.slice(1), orders[0]]);
     }
@@ -38,39 +43,74 @@ export const GameCarousel = (props: Props) => {
 
     const onMoveMouse = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         if (isDragging) {
-            // console.log('isDraging in onMoveMouse')
             setIsMovingLeft(() => e.movementX < 0)
             setLeft((left) => left + e.movementX)
         }
+
+        // Track velocity for simulating flick
+        totalXRef.current += e.movementX;
+        // setTotalX((x) => {
+        //     const newVelocity = x + e.movementX
+        //     return newVelocity
+        // })
+        
     }, [isDragging])
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+          velocityRef.current = totalXRef.current;
+          totalXRef.current = 0;
+        }, 50);
+      
+        return () => clearInterval(intervalId); // Cleanup
+      }, []); // Only setup the interval once
+    
     const onDragStart = useCallback(() => {
         setIsDragging(true);
     }, [])
 
-    const onDragEnd = useCallback(() => {
+    const onDragEnd = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         setIsDragging(false);
+        let velocity = velocityRef.current;
+        if (velocity != 0) {
+            const intervalId = setInterval(() => {
+                if (velocity < 0) {
+                    setLeft((x) => x + velocity / 10)
+                    velocity += 10; // TODO: this should taper off for a more realistic slow down
+
+                    if (velocity > 0) {
+                        clearInterval(intervalId);
+                    }
+                } else if (velocity > 0) {
+                    setLeft((x) => x + velocity / 10)
+                    velocity -= 10; // TODO: this should taper off for a more realistic slow down
+                    
+                    if (velocity < 0) {
+                        clearInterval(intervalId);
+                    }
+                }
+            }, 10)
+        }
+ 
+        velocityRef.current = 0;
+        //TODO: Implement inertia here
+        // Maybe a setTimeout style function where the time
+        // is calculated as a ratio of current velocity / slow down rate?
     }, [])
 
     useLayoutEffect(() => {
-        // TODO: Determine way to get direction we are moving when this happened
         if (visibilityChanged) {
-            console.log('isMovingLeft?', isMovingLeft, exitDirection)
             if (isMovingLeft && exitDirection === 'left') {
-                setLeft((left) => left + 400) // TODO: Better way to get element width
+                setLeft((left) => left + 410) // TODO: Better way to get element width
                 // Now rotate the order array
                 rotateRight();
             } else if (!isMovingLeft && exitDirection === 'right') {
-                setLeft((left) => left - 400)
+                setLeft((left) => left - 410)
                 // Now rotate the order array
                 rotateLeft();
             }
 
             setVisibilityChanged(false); // Responding to event, do not retrigger
-            // Offset X
-
-            // Done responding, reset flag
-  
         }
     }, [visibilityChanged])
 
