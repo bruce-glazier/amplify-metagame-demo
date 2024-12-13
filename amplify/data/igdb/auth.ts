@@ -16,9 +16,8 @@ const fetchAccessToken = async (clientId: string, secret: string) => {
 };
 
 const getNewToken = async (clientId: string, secret: string) => {
-    console.log('About to fetch token')
+    console.log('About to fetch new token')
     const tokenResponse = await fetchAccessToken(clientId, secret)
-    console.log(tokenResponse)
     const { access_token, expires_in } = tokenResponse;
     const expireTime = new Date()
     expireTime.setSeconds(expireTime.getSeconds() + expires_in)
@@ -26,8 +25,18 @@ const getNewToken = async (clientId: string, secret: string) => {
     return access_token;
 }
 
-export const getToken = async (clientId: string, secret: string) => {
-    console.log('getToken', clientId)
+const getToken = async (clientId: string, secret: string) => {
     const cachedToken = await Cache.getItem('twitchToken')
     return cachedToken ?? await getNewToken(clientId, secret);
 };
+
+export const getAxios = async () => {
+    const clientId = process.env.CLIENT_ID!;
+    const secret = process.env.SECRET!;
+
+    const token = await getToken(clientId, secret);
+    return Axios.create({ baseURL: 'https://api.igdb.com/v4', headers: {
+        'Client-ID': clientId,
+        Authorization: `Bearer ${token}`
+    }})
+}

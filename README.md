@@ -1,25 +1,40 @@
-## AWS Amplify React+Vite Starter Template
+## Welcome to the MetaGame Demo!
 
-This repository provides a starter template for creating applications using React+Vite and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+This repository leverages AWS Amplify for the backend.
 
 ## Overview
 
-This template equips you with a foundational React application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+The MetaGame site is a visually appealing and enjoyable way to discover new games, learn more about them and add them to a wishlist.
 
-## Features
+## Tech Stack
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+- AWS Amplify: The backend which manages for Auth, GraphQL APIs, 3rd-party service integration and user-data.
+- React-Query: For simplifying the network layer and caching data, etc.
+- React: As the view layer.
+- Jest/Testing Library: For comprehensive unit tests.
+- Cypress: For E2E tests.
+- Prettier/ESLint: For code formatting and rules.
+- Code optimization? What do we put here?
 
-## Deploying to AWS
+## Local setup:
 
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/react/start/quickstart/#deploy-a-fullstack-app-to-aws) of our documentation.
+npm install
+npm run dev
 
-## Security
+## Credentials
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+Sign-up is easy, just follow the sign-up flow and login.
 
-## License
+## Testing
+
+Ideally: Test are run as part of the deployment pipeline.
+
+Run `npm run test`
+Run `npm run e2e`
+
+## Theming
+
+
+## Contributions
 
 This library is licensed under the MIT-0 License. See the LICENSE file.

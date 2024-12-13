@@ -1,55 +1,25 @@
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
-import { useAuthenticator } from "@aws-amplify/ui-react";
-
+import { useGames, useReleaseDates } from "./hooks/useGames";
+import { GameCarousel } from "./components/GameCarousel";
+import { GameCard } from "./components/GameCard";
+import "./App.css"
 const client = generateClient<Schema>();
 
 function App() {
-  const { user, signOut } = useAuthenticator();
-  const [games, setGames] = useState<Schema['getGames']['returnType']>();
-
-  // Implement react-query to streamline this.....
-  useEffect(() => {
-    if (!games) {
-      const getGames = async () => {
-        const result = await client.queries.getGames({
-          query: "fields name,slug; limit 10;"
-        });
-  
-        console.log(result)
-    
-        if (result.data) {
-          setGames(() => result.data)
-        }
-      }
-
-      getGames();
-    }
-  });
-   
-
-  
-  // const [wishlist, setWishlist] = useState<Array<Schema["Wishlist"]["type"]>>([]);
-
-  // useEffect(() => {
-  //   client.models.Wishlist.observeQuery().subscribe({
-  //     next: (data) => setWishlist([...data.items]),
-  //   });
-  // }, []);
-
-  // function createWishlistItem() {
-  //   client.models.Wishlist.create({ games: {}});
-  // }
+  const { data: games } = useGames();
+  // const { data: covers } = useGetGamesWithMedia();
 
   return (
     <main>
-      <h1>{user?.signInDetails?.loginId}'s Games</h1>
+      <div style={{ display: 'flex', flexDirection: 'column', maxHeight: '100%'}}>
+        <GameCarousel games={games} />
+      </div>
+      {/* <h1>{user?.signInDetails?.loginId}'s Games</h1>
       <h1>Fetched from IGDB</h1>
       <ul>
-        {games?.map((game) => (
-          <li key={game?.slug}>{game?.name}</li>
-        ))}
+        <GameCarousel games={data} covers={covers} />
       </ul>
       <div>
         🥳 App successfully hosted. Try creating a new todo.
@@ -57,7 +27,7 @@ function App() {
         <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
           Review next step of this tutorial.
         </a>
-      </div>
+      </div> */}
     </main>
   );
 }
