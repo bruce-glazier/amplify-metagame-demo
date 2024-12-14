@@ -24,7 +24,7 @@ const schema = a.schema({
       name: a.string(),
       summary: a.string(),
       storyline: a.string(),
-      cover: a.string(),
+      cover: a.ref('gameImage'),
       artworks: a.ref('gameImage').array(),
       genres: a.ref('genre').array(),
       total_rating: a.float(),

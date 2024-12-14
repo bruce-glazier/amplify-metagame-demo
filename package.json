@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write ./src"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^6.5.5",
@@ -16,7 +17,8 @@
     "aws-amplify": "^6.6.6",
     "axios": "^1.7.9",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.0.2"
   },
   "devDependencies": {
     "@aws-amplify/backend": "^1.5.0",
@@ -31,8 +33,12 @@
     "constructs": "^10.3.0",
     "esbuild": "^0.20.2",
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
+    "prettier": "3.4.2",
     "tsx": "^4.7.2",
     "typescript": "^5.4.5",
     "vite": "^5.4.10"

@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 export type ExitDirection = 'left' | 'right';
 
 const useOnScreen = (threshold = 0) => {
   const ref = useRef(null); // Reference to the DOM element
   const [isOnScreen, setIsOnScreen] = useState(false);
-  const [exitDirection, setExitDirection] = useState<ExitDirection>('right')
+  const [exitDirection, setExitDirection] = useState<ExitDirection>('right');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -13,9 +13,9 @@ const useOnScreen = (threshold = 0) => {
         setIsOnScreen(entry.isIntersecting);
         const rect = entry.boundingClientRect;
         if (rect.right < 0) {
-          setExitDirection('left')
+          setExitDirection('left');
         } else {
-          setExitDirection('right')
+          setExitDirection('right');
         }
         // here is where we know that the element stopped being on screen
       },
@@ -29,7 +29,7 @@ const useOnScreen = (threshold = 0) => {
     };
   }, [threshold]);
 
-  return {ref, isOnScreen, exitDirection };
+  return { ref, isOnScreen, exitDirection };
 };
 
 export default useOnScreen;
