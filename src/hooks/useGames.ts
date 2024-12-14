@@ -42,5 +42,5 @@ export const getGamesQuery = (rating: number, lessThan?: boolean) => {
   const year2023Time = new Date();
   year2023Time.setFullYear(2024, 1, 1);
   const year2023AsSeconds = year2023Time.valueOf();
-  return `fields *, artworks.*, cover.*, genres.name; sort rating_count desc; limit 15; where rating ${lessThan ? '<' : '>'}= ${rating} & release_dates.date > ${year2023AsSeconds} & artworks != null;`;
+  return `fields *, artworks.*, cover.*, genres.name; sort rating_count desc; limit 16; where rating ${lessThan ? '<' : '>'}= ${rating} & release_dates.date > ${year2023AsSeconds} & artworks != null;`;
 };

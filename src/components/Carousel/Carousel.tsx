@@ -7,8 +7,6 @@ type Props = {
   listItems: JSX.Element[] | undefined;
 };
 
-const groupSize = 5;
-
   // #1; What is the window width? That determines how many tiles can fit on one screen width
     // Get tile break points for current width and do calculation
   // #2; Create pager with number of pages = total / per page
@@ -23,10 +21,28 @@ export const Carousel = (props: Props) => {
   const [groupClass, setGroupClass] = useState(['carousel-group']);
   const [groups, setGroups] = useState<JSX.Element[][]>();
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+ 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
-    setGroups(groupItems(listItems, activeGroup));
-  }, [activeGroup, listItems])
+    let groupSize = 4;
+    if (screenWidth > 1920) {
+      groupSize = 8;
+    } else if (screenWidth < 600) {
+      groupSize = 2; // keep divisible by number of games
+    }
+
+    setGroups(groupItems(listItems, activeGroup, groupSize));
+  }, [activeGroup, listItems, screenWidth])
 
   const addClass = (className: string) => {
     setGroupClass((prevClasses) => {
@@ -67,7 +83,6 @@ export const Carousel = (props: Props) => {
     if (isTransitioning) return;
     setIsTransitioning(true);
 
-    console.log('Next page!')
     // #1. Apply transition class
     addClass('slide-left');
     // #2. Schedule removal of class + increment of group
@@ -103,8 +118,8 @@ export const Carousel = (props: Props) => {
 };
 
 
-const groupItems = (listItems: JSX.Element[] | undefined, selectedGroup: number) => {
-  const chunkedGroups = chunk(listItems, groupSize);
+const groupItems = (listItems: JSX.Element[] | undefined, selectedGroup: number, groupingSize: number) => {
+  const chunkedGroups = chunk(listItems, groupingSize);
   const orderedGroups = [...chunkedGroups.slice(selectedGroup), ...chunkedGroups.slice(0, selectedGroup)];
   const weightedGroup = [orderedGroups[orderedGroups.length - 1], ...orderedGroups];
 
