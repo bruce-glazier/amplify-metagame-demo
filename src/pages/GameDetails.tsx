@@ -1,5 +1,7 @@
-function GameDetails({ params }: Route.LoaderArgs) {
-
+function GameDetails({ params }: any) {
+    return <>
+        Some Game!
+    </>
 }
 
-export default GameDetails;http://localhost:5173/details
+export default GameDetails;

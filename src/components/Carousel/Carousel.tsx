@@ -5,7 +5,6 @@ import throttle from 'lodash/throttle';
 
 type Props = {
   listItems: JSX.Element[] | undefined;
-  isLoading: boolean;
 };
 
   // #1; What is the window width? That determines how many tiles can fit on one screen width
@@ -17,16 +16,24 @@ type Props = {
     // 
 
 export const Carousel = (props: Props) => {
-  const { listItems, isLoading } = props;
+  const { listItems } = props;
   const [activeGroup, setActiveGroup] = useState(1);
   const [groupClass, setGroupClass] = useState(['carousel-group']);
   const [groups, setGroups] = useState<JSX.Element[][]>(groupItems(listItems, activeGroup, 8));
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(document.documentElement.clientWidth);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  // TODO: This only works within the carousel, I'd prefer to do this if the browser is tapped anywhere
+  useEffect(() => {
+    // Simple detection of touch devices
+    setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+  
   useLayoutEffect(() => {
     const handleResize = () => {
-      setScreenWidth(window.innerWidth);
+      setScreenWidth(document.documentElement.clientWidth);
     };
 
     window.addEventListener('resize', handleResize);
@@ -43,7 +50,7 @@ export const Carousel = (props: Props) => {
     }
 
     setGroups(groupItems(listItems, activeGroup, groupSize));
-  }, [activeGroup, listItems, screenWidth, isLoading])
+  }, [activeGroup, listItems, screenWidth])
 
   const addClass = (className: string) => {
     setGroupClass((prevClasses) => {
@@ -98,27 +105,26 @@ export const Carousel = (props: Props) => {
   }, 700), [groups])
 
   return (
-    isLoading ? <div>Loading</div> :
-    <div
-      className="carousel"
-    >
-      <div className="carousel-container">
-    {groups?.map((group, index) => (
-          <CarouselGroup
-            listItems={group}
-            key={index}
-            classes={groupClass}
-          />
-      ))}
-          <button className="pageLeft" onClick={() => { 
-          prevPage();
-        }}>{leftArrow}</button>
-          <button className="pageRight" onClick={() => { 
-                nextPage();
-        }}>{rightArrow}</button>
-        </div>
-    </div>
-  );
+  <div
+    className="carousel"
+  >
+    <div className="carousel-container">
+  {groups?.map((group, index) => (
+        <CarouselGroup
+          listItems={group}
+          key={index}
+          classes={groupClass}
+        />
+    ))}
+        <button className={`pageLeft${isMobile ? ' .touch': ''}`} onClick={() => { 
+        prevPage();
+      }}>{leftArrow}</button>
+        <button className={`pageRight${isMobile ? ' .touch': ''}`} onClick={() => { 
+              nextPage();
+      }}>{rightArrow}</button>
+      </div>
+  </div>)
+
 };
 
 

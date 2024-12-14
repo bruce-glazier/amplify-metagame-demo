@@ -1,8 +1,8 @@
 import type { Schema } from '../../amplify/data/resource';
-import './GameCover.css';
 
 type Props = {
   game: Schema['Game']['type'] | undefined;
+  onLoadComplete?: () => void;
 };
 
 // TODO: Image, fix sizes

@@ -4,6 +4,10 @@ body {
   touch-action: pan-y; /* Only allow veritcal on mobile */
   overflow-x: hidden;
   font-size: 4vw;
+  background-image: url('//images.igdb.com/igdb/image/upload/t_1080p/ar2xdm.webp');
+  background-size: contain; /* Ensure full width, maintain aspect ratio */
+  background-repeat: no-repeat; /* Prevent tiling */
+  background-position: center top; /* Center horizontally, align top vertically */
 }
 
 @media (min-width: 480px) {
