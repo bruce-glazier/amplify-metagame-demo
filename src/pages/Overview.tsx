@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import { getGamesQuery, useGames } from '../hooks/useGames';
+import { useGames } from '../hooks/useGames';
 import { Carousel } from '../components/Carousel/Carousel';
 import { GameCover } from '../components/GameCover';
 
 function Overview() {
-  const [topRated] = useState(getGamesQuery(80));
-  const [lowRated ] = useState(getGamesQuery(50, true));
   const [isCarouselOneLoaded, setIsCarouselOneLoaded] = useState(false);
   const [isCarouselTwoLoaded, setIsCarouselTwoLoaded] = useState(false);
 
-  const { data: topGames } = useGames(topRated);
-  const { data: lowRatedGames } = useGames(lowRated);
+  const { data: topGames } = useGames({rating: { rating: 80, rating_type: '>'}});
+  const { data: lowRatedGames } = useGames({rating: { rating: 50, rating_type: '<'}});
 
   return (
       <main>
