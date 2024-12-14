@@ -16,13 +16,13 @@ body {
   }
 }
 
-@media  (min-width: 720px) {
+@media (min-width: 720px) {
   body {
     font-size: 2vw;
   }
 }
 
-@media  (min-width: 1080px) {
+@media (min-width: 1080px) {
   body {
     font-size: 1vw;
   }

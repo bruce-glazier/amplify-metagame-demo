@@ -1,5 +1,3 @@
-
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Overview from './pages/Overview';
 import './App.css';
@@ -10,9 +8,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Overview />} />
-        <Route path="/details/:slugId" element={<GameDetails/>} />
+        <Route path="/details/:slugId" element={<GameDetails />} />
       </Routes>
-  </BrowserRouter>
+    </BrowserRouter>
   );
 }
 

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { useOnToggleToFalse } from '../../hooks/useOnChange';
 import useOnScreen, { ExitDirection } from '../../hooks/useOnScreen';
-import "./CarouselContent.css"
+import './CarouselContent.css';
 
 type Props = {
   onItemVisibilityChange?: (exitDirection: ExitDirection) => void;
@@ -17,7 +17,7 @@ export function CarouselContent(props: PropsWithChildren<Props>) {
   });
 
   return (
-    <div className='carousel-content' style={{ order }} ref={ref}>
+    <div className="carousel-content" style={{ order }} ref={ref}>
       {children}
     </div>
   );
