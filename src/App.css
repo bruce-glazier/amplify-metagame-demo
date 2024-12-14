@@ -3,16 +3,10 @@
     margin-bottom: 1%;
 }
 
-.carousel {
+.carousel, .carousel-container {
+    height: auto; /* Or specific height if needed */
     grid-auto-columns: 100%;
     transition: transform 0.3s ease;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome, Edge, Opera and Firefox */
   }
   
   .carousel::-webkit-scrollbar {
@@ -22,13 +16,20 @@
   .carousel:hover {
     .pageLeft {
         color: white;
+        background-color: rgba(0, 0, 0, 0.2);
     }
     .pageRight {
         color: white;
+        background-color: rgba(0, 0, 0, 0.2);
     }
   }
 
+  .carousel-container {
+    position: relative;
+  }
+
   .carousel,
+  .carousel-container,
   .carousel-group {
     display: grid;
     grid-auto-flow: column;
@@ -67,29 +68,25 @@
 
   .pageLeft {
     position: absolute;
-    min-height: 12.2vw;
-    margin-top: 6vw;
-    line-height: 4vw;
     left: 0;
     color: transparent;
     font-weight: 500;
-    font-size: 5vw;
-    transform: translateX(-20%) scaleY(2);
+    font-size: 3rem;
+    transform: translateX(-40%);
     border: none;
     background-color: transparent;
+    height: 100%;
   }
 
   .pageRight {
     position: absolute;
-    min-height: 12.2vw;
-    margin-top: 6vw;
-    line-height: 4vw;
     right: 0;
     color: transparent;
     font-weight: 500;
-    font-size: 5vw;
-    transform: translateX(20%) scaleY(2);
+    font-size: 3rem;
+    transform: translateX(20%);
     border: none;
     background-color: transparent;
+    height: 100%;
   }
   

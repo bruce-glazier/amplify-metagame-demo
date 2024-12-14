@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { CarouselGroup } from './CarouselGroup';
 import chunk from 'lodash/chunk';
 import throttle from 'lodash/throttle';
 
 type Props = {
   listItems: JSX.Element[] | undefined;
+  isLoading: boolean;
 };
 
   // #1; What is the window width? That determines how many tiles can fit on one screen width
@@ -16,14 +17,14 @@ type Props = {
     // 
 
 export const Carousel = (props: Props) => {
-  const { listItems } = props;
+  const { listItems, isLoading } = props;
   const [activeGroup, setActiveGroup] = useState(1);
   const [groupClass, setGroupClass] = useState(['carousel-group']);
-  const [groups, setGroups] = useState<JSX.Element[][]>();
+  const [groups, setGroups] = useState<JSX.Element[][]>(groupItems(listItems, activeGroup, 8));
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
- 
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
@@ -33,7 +34,7 @@ export const Carousel = (props: Props) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let groupSize = 4;
     if (screenWidth > 1920) {
       groupSize = 8;
@@ -42,7 +43,7 @@ export const Carousel = (props: Props) => {
     }
 
     setGroups(groupItems(listItems, activeGroup, groupSize));
-  }, [activeGroup, listItems, screenWidth])
+  }, [activeGroup, listItems, screenWidth, isLoading])
 
   const addClass = (className: string) => {
     setGroupClass((prevClasses) => {
@@ -97,9 +98,11 @@ export const Carousel = (props: Props) => {
   }, 700), [groups])
 
   return (
+    isLoading ? <div>Loading</div> :
     <div
       className="carousel"
     >
+      <div className="carousel-container">
     {groups?.map((group, index) => (
           <CarouselGroup
             listItems={group}
@@ -110,9 +113,10 @@ export const Carousel = (props: Props) => {
           <button className="pageLeft" onClick={() => { 
           prevPage();
         }}>{leftArrow}</button>
-              <button className="pageRight" style={{ position: 'absolute', right: 0 }} onClick={() => { 
+          <button className="pageRight" onClick={() => { 
                 nextPage();
         }}>{rightArrow}</button>
+        </div>
     </div>
   );
 };

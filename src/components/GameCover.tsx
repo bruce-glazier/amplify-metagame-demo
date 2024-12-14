@@ -12,7 +12,7 @@ export const GameCover = (props: Props) => {
     <div className="cover" aria-label="Game Cover Art Container">
       {!isLoading && (
         game?.cover?.url && (
-          <img draggable={false} src={getLargeUri(game.cover.url)} loading='lazy' />
+          <img draggable={false} src={getLargeUri(game.cover.url)} />
         ))}
         {isLoading && <p style={{ color: 'white', fontSize: '22px'}}>Loading</p>}
     </div>
