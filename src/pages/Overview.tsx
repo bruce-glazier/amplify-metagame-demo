@@ -20,7 +20,7 @@ function Overview() {
         <div className="loading" />
       )}
       <div style={{ marginLeft: 10, paddingTop: '50%' }}>
-        <h3 className="category-heading">Highest rated of all time</h3>
+        <h3 className="category-heading" aria-label="Highest rating games of all time" tabIndex={0}>Highest rated of all time</h3>
         <Carousel
           listItems={topGames?.map((g) => (
             <GameCover
@@ -30,7 +30,7 @@ function Overview() {
             />
           ))}
         />
-        <h3 className="category-heading">Discover Games</h3>
+        <h3 className="category-heading" aria-label="Discover new games" tabIndex={0}>Discover Games</h3>
         {lowRatedGames?.length && (
           <Carousel
             listItems={lowRatedGames.map((g) => (

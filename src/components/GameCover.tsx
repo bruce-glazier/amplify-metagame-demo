@@ -13,7 +13,7 @@ export const GameCover = (props: Props) => {
   return (
     <Link
       className="cover"
-      aria-label="Game Cover Art Container"
+      aria-label={`${game?.name}`}
       to={`/details/${game?.slug}`}
     >
       {!isLoading && game?.cover?.url && (
@@ -21,6 +21,7 @@ export const GameCover = (props: Props) => {
           draggable={false}
           src={getLargeUri(game.cover.url)}
           onLoad={props.onLoadComplete}
+          aria-disabled
         />
       )}
       {isLoading && <p style={{ color: 'white', fontSize: '22px' }}>Loading</p>}

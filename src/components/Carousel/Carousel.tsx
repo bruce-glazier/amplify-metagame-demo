@@ -7,14 +7,6 @@ type Props = {
   listItems: JSX.Element[] | undefined;
 };
 
-// #1; What is the window width? That determines how many tiles can fit on one screen width
-// Get tile break points for current width and do calculation
-// #2; Create pager with number of pages = total / per page
-// #3; All items in a single row, left to right, wrap around occurs only on final page and first page
-// #4; A click on the page right button triggers a "page action"
-// A page action will translateX() by the breakpoint EL width / 2
-//
-
 export const Carousel = (props: Props) => {
   const { listItems } = props;
   const [activeGroup, setActiveGroup] = useState(1);
@@ -35,6 +27,7 @@ export const Carousel = (props: Props) => {
     setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
   }, []);
 
+  // Track screen width to break groups up as 
   useLayoutEffect(() => {
     const handleResize = () => {
       setScreenWidth(document.documentElement.clientWidth);
@@ -81,8 +74,6 @@ export const Carousel = (props: Props) => {
       addClass('slide-right');
       // #2. Schedule removal of class + increment of group
       setTimeout(() => {
-        console.log('Slide finished', groups?.length);
-
         removeClass('slide-right');
         // Always start at position 1 as position 0 is reservered
         setActiveGroup((i) => {
@@ -115,6 +106,9 @@ export const Carousel = (props: Props) => {
     [groups]
   );
 
+  // TODO: The way TAB behaves is not ideal (but passable for screen readers)
+  // Need to improve focus and scrolling
+
   return (
     <div className="carousel">
       <div className="carousel-container">
@@ -122,6 +116,8 @@ export const Carousel = (props: Props) => {
           <CarouselGroup listItems={group} key={index} classes={groupClass} />
         ))}
         <button
+          aria-disabled
+          tabIndex={-1} // These buttons are only useful for visual users, tabbing handles scrolling on its own
           className={`pageLeft${isMobile ? ' .touch' : ''}`}
           onClick={() => {
             prevPage();
@@ -130,6 +126,8 @@ export const Carousel = (props: Props) => {
           {leftArrow}
         </button>
         <button
+          aria-disabled
+          tabIndex={-1}
           className={`pageRight${isMobile ? ' .touch' : ''}`}
           onClick={() => {
             nextPage();
@@ -142,6 +140,13 @@ export const Carousel = (props: Props) => {
   );
 };
 
+/*** 
+ * @param listItems The elements that need to be grouped
+ * @param selectedGroup The group index that is currently displayed on screen
+ * @param groupingSize The number of elements that should be in each group (listItems must be divisible by this value)
+ * @returns An array of element arrays of a specified groupingSize. To simulate infinite scrolling behavior the final array of elements
+ * is copied to the front of the array. 
+*/
 const groupItems = (
   listItems: JSX.Element[] | undefined,
   selectedGroup: number,

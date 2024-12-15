@@ -14,6 +14,13 @@
   display: none; /* Hide scrollbar */
 }
 
+.carousel-content:hover {
+    border-width: 2px;
+    border-color: white;
+    transform: scale(1.2);
+  }
+  
+
 .carousel:hover {
   .pageLeft,
   .pageRight {

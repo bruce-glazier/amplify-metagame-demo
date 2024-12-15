@@ -5,23 +5,6 @@ import compact from 'lodash/compact';
 
 const client = generateClient<Schema>();
 
-export const useReleaseDates = () =>
-  useQuery({
-    queryKey: ['getReleaseDates'],
-    queryFn: async () => {
-      const year2023Time = new Date();
-      year2023Time.setFullYear(2023, 1, 1);
-      const year2023AsSeconds = year2023Time.valueOf();
-      const result = await client.queries.getReleaseDates({
-        query: `fields *; where game.platforms = 48 & date > ${year2023AsSeconds}; sort date desc;`,
-      });
-
-      if (!result.data) return null;
-
-      return result.data;
-    },
-  });
-
 type GamesQueryProps = {
   rating?: {
     rating_type: '>' | '<';
