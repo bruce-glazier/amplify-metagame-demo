@@ -1,42 +1,24 @@
-.category-heading {
-  color: white;
-  margin-bottom: 1%;
+.page-title {
+    color: white;
+    padding-left: 5%;
+    padding-top: 5%;
+    font-size: 3vw;
 }
 
-.carousel,
-.carousel-container {
-  height: auto; /* Or specific height if needed */
-  grid-auto-columns: 100%;
-  transition: transform 0.3s ease;
-}
+.category-heading {
+    color: white;
+    margin-bottom: 1%;
+  }
 
 .carousel::-webkit-scrollbar {
-  display: none; /* Hide scrollbar */
+    display: none; /* Hide scrollbar */
 }
-
-.carousel-content:hover {
-    border-width: 2px;
-    border-color: white;
-    transform: scale(1.2);
-  }
   
-
-.carousel:hover {
-  .pageLeft,
-  .pageRight {
-    color: white;
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-}
-
-.pageLeft .touch,
-.pageRight .touch {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
+.carousel,
 .carousel-container {
-  position: relative;
+  grid-auto-columns: 100%;
+  transition: transform 0.3s ease;
+  z-index: 0;
 }
 
 .carousel,
@@ -49,57 +31,73 @@
 
 .carousel-group {
   border-radius: 0;
-  overflow: hidden;
-  transform: translateX(-100%);
+  overflow: visible;
+  transform: translateX(-100%); /* Start one screen width to the left (simulate infinite scroll) */
 }
 
 /* pageLeft */
 .slide-right {
-  transform: translateX(0%);
+  transform: translateX(0%); /* Slide back to the start */
   transition: transform 500ms ease-in-out;
 }
 
 /* pageRight */
 .slide-left {
-  transform: translateX(-200%);
+  transform: translateX(-200%); /* Slide even further left */
   transition: transform 500ms ease-in-out;
 }
 
-.active {
-  filter: none;
+/* Page button styles */
+.carousel:hover {
+  .pageLeft,
+  .pageRight {
+    background-color: rgba(0, 0, 0, 0.4);
+    display: block;
+  }
+  .carousel-container {
+    z-index: 255;
+  }
+  z-index: 255;
 }
 
-.carousel-content img {
-  width: 100%;
-  object-fit: cover;
-  aspect-ratio: 3 / 4;
-  height: auto;
+.pageLeft .touch,
+.pageRight .touch {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Required so page buttons have parent context */
+.carousel-container {
+    position: relative;
 }
 
 .pageLeft {
   position: absolute;
   left: 0;
-  color: transparent;
+  color: white;
   font-weight: 500;
   font-size: 3rem;
   transform: translateX(-40%);
   border: none;
   background-color: transparent;
   height: 100%;
+  display: none;
 }
 
 .pageRight {
   position: absolute;
   right: 0;
-  color: transparent;
+  color: white;
   font-weight: 500;
   font-size: 3rem;
   transform: translateX(20%);
   border: none;
   background-color: transparent;
   height: 100%;
+  display: none;
 }
 
+/* Full page cover while loading */
 .loading {
   position: fixed;
   z-index: 999;
@@ -114,4 +112,103 @@
   width: 100%;
   height: 100%;
   background: #161616;
+}
+
+.cover {
+    z-index: 0;
+}
+
+/* GameCover styles */
+.cover img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+}
+
+.cover-details {
+    height: 40vh;
+    max-width: 40vw;
+    aspect-ratio: 4 / 6;
+    background-color: rgba(0,0,0,1);
+    position: absolute;
+    border-radius: 16px;
+    visibility: hidden;
+    transition: transform 0.3s ease;
+    transition-delay: 0.5s;
+    z-index: 0;
+}
+
+.cover-details img {
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.cover-details .game-name, .cover-details .summary-heading  {
+    color: white;
+    padding-left: 1rem;
+}
+
+.cover-details .game-name {
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 1%;
+    max-height: 2.2rem;
+    overflow: hidden;
+}
+
+.cover-details .genres {
+    font-size: 0.7rem;
+    line-height: 1;
+    margin-top: 0;
+    margin-bottom: 3%;
+    font-style: italic;
+    color: gray;
+    padding-left: 1rem;
+}
+
+.cover-details .summary-heading {
+    font-size: 0.6rem;
+    margin-top: 0;
+    margin-bottom: 3%;
+}
+
+.cover-details .summary {
+    font-size: 0.5rem;
+    margin-left: 5%;
+    width: 90%;
+    height: 25%;
+    color: white;
+    overflow-y: scroll;
+    resize: none;
+    background-color: transparent;
+    border: 4px rgba(255, 255, 255, 0.2) solid;
+    border-radius: 8px;
+    scrollbar-width: thin;
+}
+
+.cover-details .learn-more {
+    margin-left: 1em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 5%;
+}
+
+.focused {
+    z-index: 0;
+}
+
+.cover-container:hover {
+    .cover-details {
+        position: absolute; /* Or 'fixed' for viewport-relative positioning */
+        z-index: 255;
+        visibility: visible;
+        transform: translate(var(--x-distance-to-center)) scale(2);
+        transform-origin: center center; 
+    }
+    .cover {
+        filter: grayscale(1)
+    }
 }

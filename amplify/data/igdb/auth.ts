@@ -16,7 +16,6 @@ const fetchAccessToken = async (clientId: string, secret: string) => {
 };
 
 const getNewToken = async (clientId: string, secret: string) => {
-    console.log('About to fetch new token')
     const tokenResponse = await fetchAccessToken(clientId, secret)
     const { access_token, expires_in } = tokenResponse;
     const expireTime = new Date()

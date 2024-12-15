@@ -1,0 +1,10 @@
+.details-container {
+    background: #161616;
+    min-height: 100vh;
+    touch-action: pan-y; /* Only allow veritcal on mobile */
+    overflow-x: hidden;
+    background-image: var(--game-details-image);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+}

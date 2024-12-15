@@ -8,15 +8,6 @@ const getGamesHandler = defineFunction({
   }
 })
 
-const getReleaseDatesHandler = defineFunction({
-  entry: './igdb/getReleaseDates.ts',
-  environment: {
-    CLIENT_ID: secret('twitch-client-id'),
-    SECRET: secret('twitch-secret')
-  }
-})
-
-
 const schema = a.schema({
   Game: a
     .customType({
@@ -29,6 +20,7 @@ const schema = a.schema({
       genres: a.ref('genre').array(),
       total_rating: a.float(),
       total_rating_count: a.integer(),
+      videos: a.ref('gameVideo').array(),
     }),
   getGames:
     a
@@ -39,6 +31,10 @@ const schema = a.schema({
      .handler(
         a.handler.function(getGamesHandler)
      ),
+  gameVideo: a.customType({
+    name: a.string(),
+    video_id: a.string().required(),
+  }),
   gameImage: a.
      customType({
       alpha_channel: a.boolean(),
@@ -59,15 +55,6 @@ const schema = a.schema({
         a.customType({
           game: a.string().required()
         }),
-    getReleaseDates: 
-      a
-      .query()
-      .arguments({ query: a.string()})
-      .returns(a.ref('releaseDate').array())
-      .authorization(allow => [allow.publicApiKey()])
-      .handler(
-        a.handler.function(getReleaseDatesHandler)
-      ),
 });
 
 export type Schema = ClientSchema<typeof schema>;

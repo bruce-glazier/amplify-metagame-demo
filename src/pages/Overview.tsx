@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGames } from '../hooks/useGames';
 import { Carousel } from '../components/Carousel/Carousel';
 import { GameCover } from '../components/GameCover';
+import "./Overview.css"
 
 function Overview() {
   const [isCarouselOneLoaded, setIsCarouselOneLoaded] = useState(false);
@@ -16,10 +17,12 @@ function Overview() {
 
   return (
     <main>
+      <div className='overview-container'>
       {(!isCarouselOneLoaded || !isCarouselTwoLoaded) && (
         <div className="loading" />
       )}
-      <div style={{ marginLeft: 10, paddingTop: '50%' }}>
+      <h1 className="page-title">MetaGames: Discover new games</h1>
+      <div style={{ marginLeft: 10, paddingTop: '20%' }}>
         <h3 className="category-heading" aria-label="Highest rating games of all time" tabIndex={0}>Highest rated of all time</h3>
         <Carousel
           listItems={topGames?.map((g) => (
@@ -42,6 +45,7 @@ function Overview() {
             ))}
           />
         )}
+      </div>
       </div>
     </main>
   );

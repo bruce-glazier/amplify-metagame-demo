@@ -42,7 +42,7 @@ export const useGames = (queryProps: GamesQueryProps) =>
 
 export const getGamesQuery = (queryProps: GamesQueryProps) => {
   let query =
-    'fields *, artworks.*, cover.*, genres.name; sort rating_count desc; limit 16;';
+    'fields *, artworks.*, cover.*, genres.name, videos.*; sort rating_count desc; limit 16;';
   if (queryProps.rating || queryProps.slug) {
     query = query.concat(' where ');
   }
@@ -60,7 +60,9 @@ export const getGamesQuery = (queryProps: GamesQueryProps) => {
   if (queryProps.rating || queryProps.slug) {
     query = query.concat(';');
   }
-
-  console.log(query);
+  
   return query;
 };
+
+export const getLargeUri = (imageUri: string) =>
+  imageUri.replace(`t_thumb`, 't_1080p');

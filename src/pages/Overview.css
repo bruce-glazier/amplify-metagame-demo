@@ -1,0 +1,11 @@
+.overview-container {
+    background: #161616;
+    min-height: 100vh;
+    touch-action: pan-y; /* Only allow veritcal on mobile */
+    overflow-x: hidden;
+    background-image: url('//images.igdb.com/igdb/image/upload/t_1080p/ar2xdm.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+  }
+  

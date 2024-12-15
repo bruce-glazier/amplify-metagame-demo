@@ -40,7 +40,7 @@ export const Carousel = (props: Props) => {
 
   useLayoutEffect(() => {
     let groupSize = 4;
-    if (screenWidth > 1920) {
+    if (screenWidth > 1000) {
       groupSize = 8;
     } else if (screenWidth < 600) {
       groupSize = 2; // keep divisible by number of games
@@ -91,6 +91,7 @@ export const Carousel = (props: Props) => {
       if (isTransitioning) return;
       setIsTransitioning(true);
 
+      console.log('nextPage!');
       // #1. Apply transition class
       addClass('slide-left');
       // #2. Schedule removal of class + increment of group
@@ -100,6 +101,7 @@ export const Carousel = (props: Props) => {
           const groupLength = groups?.length ?? 2;
           return i < groupLength - 1 ? i + 1 : 1;
         });
+        console.log('nextPage2!');
         setIsTransitioning(false);
       }, 500); // Length of animation defined by CSS
     }, 700),
@@ -108,9 +110,8 @@ export const Carousel = (props: Props) => {
 
   // TODO: The way TAB behaves is not ideal (but passable for screen readers)
   // Need to improve focus and scrolling
-
   return (
-    <div className="carousel">
+    <div className="carousel" data-testid="carousel-root">
       <div className="carousel-container">
         {groups?.map((group, index) => (
           <CarouselGroup listItems={group} key={index} classes={groupClass} />
@@ -119,6 +120,7 @@ export const Carousel = (props: Props) => {
           aria-disabled
           tabIndex={-1} // These buttons are only useful for visual users, tabbing handles scrolling on its own
           className={`pageLeft${isMobile ? ' .touch' : ''}`}
+          data-testid="prev-button"
           onClick={() => {
             prevPage();
           }}
@@ -128,6 +130,7 @@ export const Carousel = (props: Props) => {
         <button
           aria-disabled
           tabIndex={-1}
+          data-testid="next-button"
           className={`pageRight${isMobile ? ' .touch' : ''}`}
           onClick={() => {
             nextPage();
@@ -152,11 +155,16 @@ const groupItems = (
   selectedGroup: number,
   groupingSize: number
 ) => {
+  // [0, 1, 2, 3] => [[0, 1], [2, 3]] assuming groupSize = 2
   const chunkedGroups = chunk(listItems, groupingSize);
+  
+  // SelectedGroup = 1 then [[0, 1], [2, 3]] => [[2, 3], [0, 1]]
   const orderedGroups = [
     ...chunkedGroups.slice(selectedGroup),
-    ...chunkedGroups.slice(0, selectedGroup),
+    ...chunkedGroups.slice(0, selectedGroup), 
   ];
+
+  // Becomes [[2, 3], [0, 1]] => [[0, 1], [2, 3], [0, 1]]
   const weightedGroup = [
     orderedGroups[orderedGroups.length - 1],
     ...orderedGroups,
