@@ -42,20 +42,18 @@ export const useGames = (queryProps: GamesQueryProps) =>
 
 export const getGamesQuery = (queryProps: GamesQueryProps) => {
   let query =
-    'fields *, artworks.*, cover.*, genres.name, release_dates.*, videos.*, websites.*; sort rating_count desc; limit 16;';
-  if (queryProps.rating || queryProps.slug) {
-    query = query.concat(' where ');
-  }
+    'fields *, artworks.*, cover.*, genres.name, release_dates.*, videos.*, websites.*; sort rating_count desc; limit 16; where ';
 
   if (queryProps.rating) {
     const { rating, rating_type } = queryProps.rating;
-    query = query.concat(`rating ${rating_type}= ${rating}`);
+    query = query.concat(`rating ${rating_type}= ${rating} & `);
   }
 
   if (queryProps.slug) {
-    if (queryProps.rating) query.concat(' & ');
-    query = query.concat(`slug = "${queryProps.slug}"`);
+    query = query.concat(`slug = "${queryProps.slug}" & `);
   }
+
+  query = query.concat('artworks != null')
 
   if (queryProps.rating || queryProps.slug) {
     query = query.concat(';');
