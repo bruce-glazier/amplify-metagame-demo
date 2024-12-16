@@ -121,7 +121,7 @@ export const GameCover = (props: Props) => {
           </h5>
           <h3 className="summary-heading">About this game</h3>
           <textarea
-            rows={5}
+            rows={6}
             className="summary"
             spellCheck={false}
             readOnly
