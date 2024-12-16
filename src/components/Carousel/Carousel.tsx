@@ -103,7 +103,7 @@ export const Carousel = (props: Props) => {
     <div className="carousel" data-testid="carousel-root">
       <div className="carousel-container">
         {groups?.map((group, index) => (
-          <CarouselGroup listItems={group} key={index} classes={groupClass} />
+          <CarouselGroup listItems={group} key={index} classes={groupClass} data-testId={`carousel-group-${index}`}/>
         ))}
         <button
           aria-disabled

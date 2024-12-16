@@ -34,6 +34,7 @@ function GameDetails() {
       style={
         { '--game-details-image': `url(${largeUrl})` } as React.CSSProperties
       }
+      data-testId="details-page-container"
     >
       <div className="details-page-content">
         <div className="game-info">

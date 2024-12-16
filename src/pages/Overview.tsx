@@ -36,7 +36,7 @@ function Overview() {
                 game={g}
                 key={g.slug}
                 onLoadComplete={() => setIsCarouselOneLoaded(true)}
-                data-testId={`game-cover-${i}`}
+                index={i}
               />
             ))}
           />
@@ -55,7 +55,7 @@ function Overview() {
                   game={g}
                   key={g.slug}
                   onLoadComplete={() => setIsCarouselTwoLoaded(true)}
-                  data-testId={`game-cover-${i}`}
+                  index={i}
                 />
               ))}
             />

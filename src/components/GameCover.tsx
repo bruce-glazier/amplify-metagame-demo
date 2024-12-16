@@ -8,7 +8,7 @@ import './GameCover.css';
 type Props = {
   game: Schema['Game']['type'] | undefined;
   onLoadComplete?: () => void;
-  'data-testId'?: string;
+  index?: number;
 };
 
 export const GameCover = (props: Props) => {
@@ -82,10 +82,11 @@ export const GameCover = (props: Props) => {
   }, [screenSize, position]);
 
   return (
-    <div className="cover-container" ref={detailsRef} data-testId={props['data-testId'] ?? 'game-cover'}>
+    <div className="cover-container" ref={detailsRef} data-testId={`game-cover-container-${props?.index}`}>
       <div
         className={isFocused ? 'cover-details focused' : 'cover-details'}
         aria-label={`${game?.name}`}
+        data-testId={`game-cover-details-${props?.index}`}
         style={
           {
             '--x-distance-to-center': `${offset.x}px`,
