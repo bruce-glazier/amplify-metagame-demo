@@ -12,75 +12,73 @@ type Props = {
 
 export const GameCover = (props: Props) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [centerXOffset, setCenterXOffset] = useState(0);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
   const { game } = props;
 
   const isLoading = !game?.name || !game.summary;
   const detailsRef = useRef<HTMLDivElement>(null);
   const screenSize = useScreenSize();
+  const [position, setPosition] = useState(detailsRef.current?.getBoundingClientRect());
 
+
+  // Setup listeners to track components current position and size in state
   useEffect(() => {
-    // We want a few conditions to be met
-    // #1. Final position must have overlap with original elements position so we can mouse over without loosing focus
-    // #2. Adjust Y position so that we are not out of screen
-    if (detailsRef.current) {
-      const rect = detailsRef.current.getBoundingClientRect();
+    const updatePosition = () => {
+      if (detailsRef.current) {
+        setPosition(detailsRef.current.getBoundingClientRect());
+      }
+    };
+
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+    window.addEventListener('scroll', updatePosition, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('scroll', updatePosition);
+    };
+  }, []);
+
+
+  // Calculate how far the Cover needs to travel to be on screen
+  useEffect(() => {
+    if (position) {
+      // Distance to travel for middle of screen
       const toCenterX = Math.round(
-        screenSize.width / 2 - rect.x - rect.width / 2
+        screenSize.width / 2 - position.x - (position.width / 2)
       );
 
-      const destinationLeftEdge = rect.x + toCenterX;
-      const destinationRightEdge = rect.right + toCenterX;
 
-      const leftEdge = rect.x;
 
-      if (game?.slug === 'diablo-immortal') {
-        // 452, 1148, 1108.....
-        // my destination > the right of the original el
-        // therefore.... we need to use the right value....
-        console.log({
-          width: rect.width,
-          x: rect.x,
-          toCenterX,
-          destination: destinationLeftEdge,
-          left: rect.x,
-        });
-      }
 
-      // Do not permit travel further than the edge of the original container
-      if (toCenterX > 0 && destinationLeftEdge > rect.right) {
-        if (game?.slug === 'diablo-immortal') {
-          console.log('using right', rect.right);
-        }
-        setCenterXOffset(rect.width);
-        // if my new right edge is beyond the initial left edge
-      } else if (toCenterX < 0 && destinationRightEdge < leftEdge) {
-        if (game?.slug === 'diablo-immortal') {
-          console.log('using left', rect.left);
-        }
-        setCenterXOffset(-rect.width);
+      // Put bounds on how far the element can travel
+      // We need to make sure it retains some overlap with its original position
+      // so that you can mouse hover of to it
+      let xOffset = 0;
+      const destinationLeftEdge = position.x + toCenterX;
+      const destinationRightEdge = position.right + toCenterX;
+      const leftEdge = position.x;
+      const rightEdge = position.right;
+      const travelingRight = toCenterX > 0;
+      const travelingLeft = toCenterX < 0;
+
+
+      if (travelingRight && destinationLeftEdge > rightEdge) {
+        // if moving right, make sure my new left edge is not beyond my original right position
+        xOffset = position.width;
+      } else if (travelingLeft && destinationRightEdge < leftEdge) {
+        // if moving left, make sure my new right edge is not beyond my original left position
+        xOffset = -position.width;
       } else {
-        if (game?.slug === 'diablo-immortal') {
-          console.log('using nominal');
-        }
-        setCenterXOffset(toCenterX);
+        xOffset = toCenterX;
       }
+
+      // For Y, we just use the center of the screen
+      // 0 is top, down is positive, up is negative
+      const toCenterY = Math.round(screenSize.height / 2 - position.y - (position.height / 2))
+      setOffset({ x: xOffset, y: toCenterY })
     }
-  }, [screenSize]);
-
-  // New plan
-  // Desktop: On hover, show the details after 400
-
-  // On Desktop, focus occurs after 400ms of hovering
-  // On mobile, focus occurs from a tap
-  // On keyboard, focus occurs on tab...
-  //       to={`/details/${game?.slug}`}
-  // Transition from one to the other....
-  // Thats more a CSS thing...
-
-  // Viewport Width / 2 = center
-  // Element X = current position
-  // Center - current position = translate amount to center
+  }, [screenSize, position]);
 
   return (
     <div className="cover-container" ref={detailsRef}>
@@ -89,16 +87,15 @@ export const GameCover = (props: Props) => {
         aria-label={`${game?.name}`}
         style={
           {
-            '--x-distance-to-center': `${centerXOffset}px`,
+            '--x-distance-to-center': `${offset.x}px`,
+            '--y-distance-to-center': `${offset.y}px`,
           } as React.CSSProperties
         }
         onClick={() => {
           focus();
-          console.log(game?.slug);
           setIsFocused(true);
         }}
         onBlur={() => {
-          console.log('lostFocus');
           setIsFocused(false);
         }}
       >

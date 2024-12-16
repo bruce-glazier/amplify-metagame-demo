@@ -9,8 +9,6 @@ export const handler: Schema["getGames"]["functionHandler"] = async (event, cont
     if (result.status !== 200) {
         throw new Error('Failed fetching games')
     }
-
-    console.log(result.data)
-    console.log(result.statusText)
+    
     return result.data;
 };

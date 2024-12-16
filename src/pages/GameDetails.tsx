@@ -10,9 +10,6 @@ function GameDetails() {
   const backgroundImage = data?.[0]?.artworks?.[0]?.url;
   const largeUrl = backgroundImage ? getLargeUri(backgroundImage) : '';
 
-  // Group size = items length / 15
-  console.log(data?.[0]?.videos?.length);
-
   const listItems = useCallback(() => {
     return compact(
       data?.[0]?.videos?.map((v) => (

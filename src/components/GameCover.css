@@ -96,7 +96,7 @@
     position: absolute; /* Or 'fixed' for viewport-relative positioning */
     z-index: 255;
     visibility: visible;
-    transform: translate(var(--x-distance-to-center)) scale(2);
+    transform: translate(var(--x-distance-to-center), var(--y-distance-to-center)) scale(2);
     transform-origin: center center;
   }
   .cover {

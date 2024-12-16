@@ -84,7 +84,6 @@ export const Carousel = (props: Props) => {
       if (isTransitioning) return;
       setIsTransitioning(true);
 
-      console.log('nextPage!');
       // #1. Apply transition class
       addClass('slide-left');
       // #2. Schedule removal of class + increment of group
@@ -94,7 +93,7 @@ export const Carousel = (props: Props) => {
           const groupLength = groups?.length ?? 2;
           return i < groupLength - 1 ? i + 1 : 1;
         });
-        console.log('nextPage2!');
+
         setIsTransitioning(false);
       }, 500); // Length of animation defined by CSS
     }, 700),
