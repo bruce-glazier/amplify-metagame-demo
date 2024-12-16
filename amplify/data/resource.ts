@@ -16,6 +16,7 @@ const schema = a.schema({
       summary: a.string(),
       storyline: a.string(),
       cover: a.ref('gameImage'),
+      multiplayer_modes: a.ref('multiplayer_modes').array(),
       artworks: a.ref('gameImage').array(),
       genres: a.ref('genre').array(),
       release_dates: a.ref('releaseDate').array(),
@@ -23,6 +24,7 @@ const schema = a.schema({
       total_rating_count: a.integer(),
       videos: a.ref('gameVideo').array(),
       websites: a.ref('website').array(),
+      platforms: a.ref('platforms').array(),
     }),
   getGames:
     a
@@ -61,7 +63,18 @@ const schema = a.schema({
       category: a.ref('platform'),
       url: a.string().required(),
     }),
-    platform: a.enum(['official', 'wikia', 'wikipedia', 'facebook', 'twitter', 'twitch', 'instagram', 'youtube', 'iphone', 'ipad', 'android', 'steam', 'itch', 'epicgames', 'gog', 'discord'])
+    multiplayer_modes: a.customType({
+      splitscreen: a.boolean(),
+      offlinecoop: a.boolean(),
+      onlinemax: a.integer(),
+    }),
+    platform: a.enum(['official', 'wikia', 'wikipedia', 'facebook', 'twitter', 'twitch', 'instagram', 'youtube', 'iphone', 'ipad', 'android', 'steam', 'itch', 'epicgames', 'gog', 'discord']),
+    platforms: a.customType({
+      platform_logo: a.customType({
+        url: a.string(),
+        alpha_channel: a.boolean(),
+      }),
+    }),
 });
 
 export type Schema = ClientSchema<typeof schema>;

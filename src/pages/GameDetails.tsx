@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getLargeUri, useGames } from '../hooks/useGames';
+import { Link, useParams } from 'react-router-dom';
+import { getLargeUri, getLargeUriAsPng, useGames } from '../hooks/useGames';
 import './GameDetails.css';
 import { useCallback } from 'react';
 import compact from 'lodash/compact';
@@ -53,6 +53,15 @@ function GameDetails() {
               {`Released: ${data?.[0]?.release_dates?.[0]?.human}`}
             </div>
             <div className="summary">{data?.[0]?.summary}</div>
+            {data?.[0]?.websites?.[0]?.url && <Link to={data[0].websites[0].url} className="site-url">Visit Site</Link>}
+            <div className="plaforms-heading">Available On</div>
+            <div className='platform-logos'>
+              {data?.[0].platforms?.map((p) => {
+                if (p?.platform_logo?.alpha_channel) {
+                  return <div className='platform-logo'><img className='platform-logo-image' src={getLargeUriAsPng(p?.platform_logo?.url ?? '')} /></div>
+                }
+              })}
+            </div>
           </div>
           <h1 className="media-heading">Videos</h1>
           <div className="videos">

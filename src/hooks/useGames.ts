@@ -31,7 +31,7 @@ export const useGames = (queryProps: GamesQueryProps) =>
 
 export const getGamesQuery = (queryProps: GamesQueryProps) => {
   let query =
-    'fields *, artworks.*, cover.*, genres.name, release_dates.*, videos.*, websites.*; sort rating_count desc; limit 16; where ';
+    'fields *, artworks.*, platforms.platform_logo.url, platforms.platform_logo.alpha_channel, cover.*, genres.name, release_dates.*, multiplayer_modes.*, videos.*, websites.*; sort rating_count desc; limit 16; where ';
 
   if (queryProps.rating) {
     const { rating, rating_type } = queryProps.rating;
@@ -53,3 +53,6 @@ export const getGamesQuery = (queryProps: GamesQueryProps) => {
 
 export const getLargeUri = (imageUri: string) =>
   imageUri.replace(`t_thumb`, 't_1080p');
+
+export const getLargeUriAsPng = (imageUri: string) =>
+  imageUri.replace(`t_thumb`, 't_1080p').replace('.jpg', '.png');

@@ -55,7 +55,7 @@
 .details-page-content .game-info {
   border-radius: 8px;
   border: rgb(150, 150, 150) solid 1px;
-  background-color: #020202ef;
+  background-color: #100f1134; /*; */
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -66,7 +66,8 @@
 
 .details-page-content .name,
 .details-page-content .release-date,
-.details-page-content .summary {
+.details-page-content .summary,
+.details-page-content .plaforms-heading {
   color: rgb(255, 255, 255);
   text-shadow: 1px 2px black;
 }
@@ -94,6 +95,7 @@
   font-size: 1rem;
   padding-bottom: 1vw;
   padding: 1vw 1vw 3vw 1vw;
+  margin-bottom: 2vw;
 }
 
 .details-page-content .name {
@@ -106,4 +108,34 @@
 
 .details-page-content .game-video-iframe {
   aspect-ratio: 16/9;
+}
+
+.details-page-content .platform-logos {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.details-page-content .platform-logo {
+  min-width: 80px;
+  max-width: 100px;
+  border-radius: 8px;
+  border: 3px solid black;
+  margin: 2%;
+  aspect-ratio: 2/1;
+  background-color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.details-page-content .platform-logo-image {
+  object-fit: scale-down;
+  width: 100%;
+  height: 100%;
+}
+
+.details-page-content .site-url {
+  font-size: 1rem;
+  display: block;
 }
