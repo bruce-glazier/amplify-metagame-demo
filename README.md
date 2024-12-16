@@ -7,14 +7,13 @@ This repository leverages AWS Amplify for the backend.
 The MetaGame site is a visually appealing and enjoyable way to discover new games, learn more about them and add them to a wishlist.
 
 ## Tech Stack
-
-- AWS Amplify: The backend which manages for Auth, GraphQL APIs, 3rd-party service integration and user-data.
-- React-Query: For simplifying the network layer and caching data, etc.
 - React: As the view layer.
-- Jest/Testing Library: For comprehensive unit tests.
+- Vite: Build tools and development server
+- AWS Amplify: The backend which manages for Auth, GraphQL APIs, 3rd-party service integration.
+- React-Query: For simplifying the network layer, caching data, etc.
+- ViTest/Testing Library: For comprehensive unit tests.
 - Cypress: For E2E tests.
 - Prettier/ESLint: For code formatting and rules.
-- Code optimization? What do we put here?
 
 ## Local setup:
 
@@ -23,18 +22,25 @@ npm run dev
 
 ## Credentials
 
-Sign-up is easy, just follow the sign-up flow and login.
+Put the amplify_outputs.json file in the root directory.
 
 ## Testing
 
-Ideally: Test are run as part of the deployment pipeline.
-
 Run `npm run test`
-Run `npm run e2e`
 
-## Theming
+## Known issues
+
+- On occassion an offscreen image may load the wrong size causing the first row of games to take up more space than expected.
+- On preview details the Y should translate into the viewport preventing cutoff
 
 
-## Contributions
+## Future improvements
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+- Replace "< " and ">" with SVG arrow for a better look
+- Details preview card does not have a consistent layout across screen sizes
+- Default scrollbars should be replaced with a more appealing scroll
+- Padding on the details page should be adjusted
+- On first page, there is too much empty space / background image is too large on max resolution
+- Fonts: Default fonts are boring
+- Network Error handling
+- Get text localization-ready

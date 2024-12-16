@@ -28,15 +28,7 @@ export const useGames = (queryProps: GamesQueryProps) =>
     },
     select: (s) => compact(s), // Only keep defined values, mostly for typing
     placeholderData: [
-      { slug: 'loading-1' },
-      { slug: 'loading-2' },
-      { slug: 'loading-3' },
-      { slug: 'loading-4' },
-      { slug: 'loading-5' },
-      { slug: 'loading-6' },
-      { slug: 'loading-7' },
-      { slug: 'loading-8' },
-      { slug: 'loading-9' },
+
     ],
   });
 

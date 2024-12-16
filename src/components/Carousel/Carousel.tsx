@@ -3,6 +3,7 @@ import { CarouselGroup } from './CarouselGroup';
 import chunk from 'lodash/chunk';
 import throttle from 'lodash/throttle';
 import './Carousel.css';
+import { useScreenSize } from '../../hooks/useScreenSize';
 
 type Props = {
   listItems: JSX.Element[] | undefined;
@@ -16,9 +17,7 @@ export const Carousel = (props: Props) => {
     groupItems(listItems, activeGroup, 8)
   );
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(
-    document.documentElement.clientWidth
-  );
+  const screenSize = useScreenSize();
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -28,22 +27,11 @@ export const Carousel = (props: Props) => {
     setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
   }, []);
 
-  // Track screen width to break groups up as
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(document.documentElement.clientWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   useLayoutEffect(() => {
     let groupSize = 4;
-    if (screenWidth > 1000) {
+    if (screenSize.width > 1000) {
       groupSize = 8;
-    } else if (screenWidth < 600) {
+    } else if (screenSize.width < 600) {
       groupSize = 2; // keep divisible by number of games
     }
 
@@ -52,7 +40,7 @@ export const Carousel = (props: Props) => {
     }
 
     setGroups(groupItems(listItems, activeGroup, groupSize));
-  }, [activeGroup, listItems, screenWidth]);
+  }, [activeGroup, listItems, screenSize.width]);
 
   const addClass = (className: string) => {
     setGroupClass((prevClasses) => {
