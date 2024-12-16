@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getLargeUri, useGames } from '../hooks/useGames';
 import './GameDetails.css';
 import { useCallback } from 'react';
 import compact from 'lodash/compact';
+import { Loader } from '../components/Loader';
 
 function GameDetails() {
+  const [isLoading, setIsLoading] = useState(true);
   const { slugId } = useParams();
   const { data } = useGames({ slug: slugId });
   const backgroundImage = data?.[0]?.artworks?.[0]?.url;
@@ -29,6 +31,8 @@ function GameDetails() {
   }, [data]);
 
   return (
+    <>
+    <Loader isLoading={isLoading} />
     <div
       className="details-page-container"
       style={
@@ -39,7 +43,7 @@ function GameDetails() {
       <div className="details-page-content">
         <div className="game-info">
           <div className="cover">
-            <img src={`${getLargeUri(data?.[0]?.cover?.url ?? '')}`}></img>
+            <img onLoad={() => setIsLoading(false)} src={`${getLargeUri(data?.[0]?.cover?.url ?? '')}`}></img>
           </div>
           <div className="name">{data?.[0]?.name}</div>
           <div className="release-date">
@@ -55,6 +59,7 @@ function GameDetails() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

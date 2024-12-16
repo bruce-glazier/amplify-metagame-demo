@@ -27,9 +27,6 @@ export const useGames = (queryProps: GamesQueryProps) =>
       return result.data;
     },
     select: (s) => compact(s), // Only keep defined values, mostly for typing
-    placeholderData: [
-
-    ],
   });
 
 export const getGamesQuery = (queryProps: GamesQueryProps) => {

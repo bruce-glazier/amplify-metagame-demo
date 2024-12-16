@@ -100,6 +100,10 @@
   font-size: 2rem;
 }
 
+.details-page-content .videos {
+  padding-bottom: 5rem;
+}
+
 .details-page-content .game-video-iframe {
   aspect-ratio: 16/9;
 }

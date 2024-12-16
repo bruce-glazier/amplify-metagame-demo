@@ -41,16 +41,13 @@ export const GameCover = (props: Props) => {
   }, []);
 
 
-  // Calculate how far the Cover needs to travel to be on screen
+  // Calculate how far the details card needs to travel to be center in the viewport
   useEffect(() => {
     if (position) {
       // Distance to travel for middle of screen
       const toCenterX = Math.round(
         screenSize.width / 2 - position.x - (position.width / 2)
       );
-
-
-
 
       // Put bounds on how far the element can travel
       // We need to make sure it retains some overlap with its original position

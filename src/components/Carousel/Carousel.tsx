@@ -163,6 +163,3 @@ const groupItems = (
 
   return weightedGroup;
 };
-
-const rightArrow = '>';
-const leftArrow = '<';

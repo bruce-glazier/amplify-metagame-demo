@@ -36,8 +36,11 @@ Run `npm run e2e` for Cypress tests
 ## Future improvements
 
 Priority list:
-- Groom comments, look for last minute cleanup items
+- Accessibility (?)
+- Run cypress tests from package.json
 - More content for details page! It is pretty limited.
+- Found that we are importing font styles from amplify-ui library
+- Add loading indicator to full page loading screen
 
 Stretch goals:
 - Fonts: Default fonts are boring
@@ -45,6 +48,7 @@ Stretch goals:
 - Get text localization-ready
 
 Done: 
+- (Done) Groom comments, look for last minute cleanup items
 - (Not Doing) More unit tests
 - (Done) Cypress tests (at least one)
 - (DONE) Details preview card does not have a consistent layout across screen sizes
