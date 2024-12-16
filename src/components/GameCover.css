@@ -1,0 +1,105 @@
+.cover {
+  z-index: 0;
+}
+
+/* GameCover styles */
+.cover-container img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+}
+
+.cover-container {
+    display: flex;
+    justify-content: center;
+}
+
+.cover-details {
+  height: 40vh;
+  max-width: 40vw;
+  aspect-ratio: 4 / 6;
+  background-color: rgba(0, 0, 0, 1);
+  position: absolute;
+  border-radius: 16px;
+  overflow: hidden;
+  visibility: hidden;
+  transition: transform 0.3s ease;
+  transition-delay: 0.5s;
+  z-index: 0;
+}
+
+.cover-details img {
+  object-fit: cover;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.cover-details .game-name,
+.cover-details .summary-heading {
+  color: white;
+  padding-left: 1rem;
+}
+
+.cover-details .game-name {
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 1%;
+  max-height: 2.2rem;
+  overflow: hidden;
+}
+
+.cover-details .genres {
+  font-size: 0.7rem;
+  line-height: 1;
+  margin-top: 0;
+  margin-bottom: 3%;
+  font-style: italic;
+  color: gray;
+  padding-left: 1rem;
+}
+
+.cover-details .summary-heading {
+  font-size: 0.6rem;
+  margin-top: 0;
+  margin-bottom: 3%;
+}
+
+.cover-details .summary {
+  font-size: 0.5rem;
+  margin-left: 5%;
+  width: 90%;
+  height: 25%;
+  color: white;
+  overflow-y: scroll;
+  resize: none;
+  background-color: transparent;
+  border: 1px rgba(255, 255, 255, 0.2) solid;
+  border-radius: 8px;
+  scrollbar-width: thin;
+}
+
+.cover-details .learn-more {
+  margin-left: 1em;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 5%;
+}
+
+.focused {
+  z-index: 0;
+}
+
+.cover-container:hover {
+  .cover-details {
+    position: absolute; /* Or 'fixed' for viewport-relative positioning */
+    z-index: 255;
+    visibility: visible;
+    transform: translate(var(--x-distance-to-center)) scale(2);
+    transform-origin: center center;
+  }
+  .cover {
+    filter: grayscale(1);
+  }
+}

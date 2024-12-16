@@ -2,6 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { CarouselGroup } from './CarouselGroup';
 import chunk from 'lodash/chunk';
 import throttle from 'lodash/throttle';
+import './Carousel.css';
 
 type Props = {
   listItems: JSX.Element[] | undefined;
@@ -27,7 +28,7 @@ export const Carousel = (props: Props) => {
     setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
   }, []);
 
-  // Track screen width to break groups up as 
+  // Track screen width to break groups up as
   useLayoutEffect(() => {
     const handleResize = () => {
       setScreenWidth(document.documentElement.clientWidth);
@@ -44,6 +45,10 @@ export const Carousel = (props: Props) => {
       groupSize = 8;
     } else if (screenWidth < 600) {
       groupSize = 2; // keep divisible by number of games
+    }
+
+    if ((listItems ?? []).length < 8) {
+      groupSize = 2;
     }
 
     setGroups(groupItems(listItems, activeGroup, groupSize));
@@ -143,13 +148,13 @@ export const Carousel = (props: Props) => {
   );
 };
 
-/*** 
+/***
  * @param listItems The elements that need to be grouped
  * @param selectedGroup The group index that is currently displayed on screen
  * @param groupingSize The number of elements that should be in each group (listItems must be divisible by this value)
  * @returns An array of element arrays of a specified groupingSize. To simulate infinite scrolling behavior the final array of elements
- * is copied to the front of the array. 
-*/
+ * is copied to the front of the array.
+ */
 const groupItems = (
   listItems: JSX.Element[] | undefined,
   selectedGroup: number,
@@ -157,11 +162,11 @@ const groupItems = (
 ) => {
   // [0, 1, 2, 3] => [[0, 1], [2, 3]] assuming groupSize = 2
   const chunkedGroups = chunk(listItems, groupingSize);
-  
+
   // SelectedGroup = 1 then [[0, 1], [2, 3]] => [[2, 3], [0, 1]]
   const orderedGroups = [
     ...chunkedGroups.slice(selectedGroup),
-    ...chunkedGroups.slice(0, selectedGroup), 
+    ...chunkedGroups.slice(0, selectedGroup),
   ];
 
   // Becomes [[2, 3], [0, 1]] => [[0, 1], [2, 3], [0, 1]]

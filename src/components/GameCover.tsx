@@ -3,6 +3,7 @@ import type { Schema } from '../../amplify/data/resource';
 import React, { useEffect, useRef, useState } from 'react';
 import { useScreenSize } from '../hooks/useScreenSize';
 import { getLargeUri } from '../hooks/useGames';
+import './GameCover.css';
 
 type Props = {
   game: Schema['Game']['type'] | undefined;
@@ -14,7 +15,6 @@ export const GameCover = (props: Props) => {
   const [centerXOffset, setCenterXOffset] = useState(0);
   const { game } = props;
 
-
   const isLoading = !game?.name || !game.summary;
   const detailsRef = useRef<HTMLDivElement>(null);
   const screenSize = useScreenSize();
@@ -25,35 +25,43 @@ export const GameCover = (props: Props) => {
     // #2. Adjust Y position so that we are not out of screen
     if (detailsRef.current) {
       const rect = detailsRef.current.getBoundingClientRect();
-      const toCenterX = Math.round(screenSize.width / 2 - rect.x - (rect.width / 2));
+      const toCenterX = Math.round(
+        screenSize.width / 2 - rect.x - rect.width / 2
+      );
 
       const destinationLeftEdge = rect.x + toCenterX;
       const destinationRightEdge = rect.right + toCenterX;
 
       const leftEdge = rect.x;
 
-      if (game?.slug === "diablo-immortal") {
+      if (game?.slug === 'diablo-immortal') {
         // 452, 1148, 1108.....
         // my destination > the right of the original el
         // therefore.... we need to use the right value....
-        console.log({width: rect.width, x: rect.x, toCenterX, destination: destinationLeftEdge, left: rect.x})
+        console.log({
+          width: rect.width,
+          x: rect.x,
+          toCenterX,
+          destination: destinationLeftEdge,
+          left: rect.x,
+        });
       }
 
       // Do not permit travel further than the edge of the original container
       if (toCenterX > 0 && destinationLeftEdge > rect.right) {
-        if (game?.slug === "diablo-immortal") {
-          console.log('using right', rect.right)
+        if (game?.slug === 'diablo-immortal') {
+          console.log('using right', rect.right);
         }
         setCenterXOffset(rect.width);
         // if my new right edge is beyond the initial left edge
       } else if (toCenterX < 0 && destinationRightEdge < leftEdge) {
-        if (game?.slug === "diablo-immortal") {
-          console.log('using left', rect.left)
+        if (game?.slug === 'diablo-immortal') {
+          console.log('using left', rect.left);
         }
         setCenterXOffset(-rect.width);
       } else {
-        if (game?.slug === "diablo-immortal") {
-          console.log('using nominal')
+        if (game?.slug === 'diablo-immortal') {
+          console.log('using nominal');
         }
         setCenterXOffset(toCenterX);
       }
@@ -75,18 +83,24 @@ export const GameCover = (props: Props) => {
   // Center - current position = translate amount to center
 
   return (
-    <div className="cover-container"
-    ref={detailsRef}>
+    <div className="cover-container" ref={detailsRef}>
       <div
-        className={isFocused ? "cover-details focused" : "cover-details"}
+        className={isFocused ? 'cover-details focused' : 'cover-details'}
         aria-label={`${game?.name}`}
         style={
           {
             '--x-distance-to-center': `${centerXOffset}px`,
           } as React.CSSProperties
         }
-        onClick={()=> {focus(); console.log(game?.slug); setIsFocused(true) }}
-        onBlur={() => {console.log('lostFocus'); setIsFocused(false) }}
+        onClick={() => {
+          focus();
+          console.log(game?.slug);
+          setIsFocused(true);
+        }}
+        onBlur={() => {
+          console.log('lostFocus');
+          setIsFocused(false);
+        }}
       >
         {!isLoading && game?.artworks?.[0]?.url && (
           <img
@@ -104,9 +118,13 @@ export const GameCover = (props: Props) => {
           {game?.genres?.map((g) => g?.name).join(' ')}
         </h5>
         <h3 className="summary-heading">About this game</h3>
-        <textarea className="summary" spellCheck={false} value={game?.summary ?? ''}>
-  
-        </textarea>
+        <textarea
+          className="summary"
+          spellCheck={false}
+          readOnly
+          disabled
+          value={game?.summary ?? ''}
+        ></textarea>
         <Link className="learn-more" to={`/details/${game?.slug}`}>
           Learn more
         </Link>
@@ -127,4 +145,3 @@ export const GameCover = (props: Props) => {
     </div>
   );
 };
-

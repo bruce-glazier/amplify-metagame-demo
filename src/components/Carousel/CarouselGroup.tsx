@@ -6,9 +6,5 @@ type Props = {
 export const CarouselGroup = (props: Props) => {
   const { listItems, classes } = props;
 
-  return (
-    <div className={classes?.join(' ')}>
-      {listItems}
-    </div>
-  );
+  return <div className={classes?.join(' ')}>{listItems}</div>;
 };

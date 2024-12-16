@@ -18,9 +18,11 @@ const schema = a.schema({
       cover: a.ref('gameImage'),
       artworks: a.ref('gameImage').array(),
       genres: a.ref('genre').array(),
+      release_dates: a.ref('releaseDate').array(),
       total_rating: a.float(),
       total_rating_count: a.integer(),
       videos: a.ref('gameVideo').array(),
+      websites: a.ref('website').array(),
     }),
   getGames:
     a
@@ -53,8 +55,13 @@ const schema = a.schema({
       }),
     releaseDate: 
         a.customType({
-          game: a.string().required()
+          human: a.string().required(),
         }),
+    website: a.customType({
+      category: a.ref('platform'),
+      url: a.string().required(),
+    }),
+    platform: a.enum(['official', 'wikia', 'wikipedia', 'facebook', 'twitter', 'twitch', 'instagram', 'youtube', 'iphone', 'ipad', 'android', 'steam', 'itch', 'epicgames', 'gog', 'discord'])
 });
 
 export type Schema = ClientSchema<typeof schema>;
