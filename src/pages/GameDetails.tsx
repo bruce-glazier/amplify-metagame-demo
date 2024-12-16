@@ -32,33 +32,36 @@ function GameDetails() {
 
   return (
     <>
-    <Loader isLoading={isLoading} />
-    <div
-      className="details-page-container"
-      style={
-        { '--game-details-image': `url(${largeUrl})` } as React.CSSProperties
-      }
-      data-testId="details-page-container"
-    >
-      <div className="details-page-content">
-        <div className="game-info">
-          <div className="cover">
-            <img onLoad={() => setIsLoading(false)} src={`${getLargeUri(data?.[0]?.cover?.url ?? '')}`}></img>
+      <Loader isLoading={isLoading} />
+      <div
+        className="details-page-container"
+        style={
+          { '--game-details-image': `url(${largeUrl})` } as React.CSSProperties
+        }
+        data-testId="details-page-container"
+      >
+        <div className="details-page-content">
+          <div className="game-info">
+            <div className="cover">
+              <img
+                onLoad={() => setIsLoading(false)}
+                src={`${getLargeUri(data?.[0]?.cover?.url ?? '')}`}
+              ></img>
+            </div>
+            <div className="name">{data?.[0]?.name}</div>
+            <div className="release-date">
+              {`Released: ${data?.[0]?.release_dates?.[0]?.human}`}
+            </div>
+            <div className="summary">{data?.[0]?.summary}</div>
           </div>
-          <div className="name">{data?.[0]?.name}</div>
-          <div className="release-date">
-            {`Released: ${data?.[0]?.release_dates?.[0]?.human}`}
+          <h1 className="media-heading">Videos</h1>
+          <div className="videos">
+            {listItems().map((IFRAME) => (
+              <div className="video">{IFRAME}</div>
+            ))}
           </div>
-          <div className="summary">{data?.[0]?.summary}</div>
-        </div>
-        <h1 className="media-heading">Videos</h1>
-        <div className="videos">
-          {listItems().map((IFRAME) => (
-            <div className="video">{IFRAME}</div>
-          ))}
         </div>
       </div>
-    </div>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
   listItems: JSX.Element[] | undefined;
@@ -9,5 +9,12 @@ type Props = {
 export const CarouselGroup = (props: Props) => {
   const { listItems, classes } = props;
 
-  return <div className={classes?.join(' ')} data-testId={props['data-testId'] ?? 'carousel-group'}>{listItems}</div>;
+  return (
+    <div
+      className={classes?.join(' ')}
+      data-testId={props['data-testId'] ?? 'carousel-group'}
+    >
+      {listItems}
+    </div>
+  );
 };

@@ -10,27 +10,27 @@
 }
 
 .cover-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-    @media (max-width: 3000px) {
-    .cover-details {
-        font-size: 0.24vw;
-        }
-    }
-  
-  @media (max-width: 1016px) {
-    .cover-details {
-      font-size: 0.52vw;
-    }
+@media (max-width: 3000px) {
+  .cover-details {
+    font-size: 0.24vw;
   }
-  
-  @media (max-width: 615px) {
-    .cover-details {
-      font-size: 1vw;
-    }
+}
+
+@media (max-width: 1016px) {
+  .cover-details {
+    font-size: 0.52vw;
   }
+}
+
+@media (max-width: 615px) {
+  .cover-details {
+    font-size: 1vw;
+  }
+}
 
 .cover-details {
   height: 100%;
@@ -46,17 +46,17 @@
 }
 
 .cover-container .cover-details img {
-    width: 100%;
-    object-fit: cover;
-    aspect-ratio: 16 / 9;
-  }
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+}
 
 .cover-details .description-container {
-    max-height: 45%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    color: white;
-    position: 'relative';
+  max-height: 45%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  color: white;
+  position: 'relative';
 }
 
 .cover-details .game-name {
@@ -66,7 +66,7 @@
   margin-top: 0.3em;
   margin-bottom: 0.3em;
   overflow: hidden;
-  white-space: nowrap; 
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
@@ -98,8 +98,8 @@
 }
 
 .cover-details .learn-more {
-    position: absolute;
-    bottom: 2em;
+  position: absolute;
+  bottom: 2em;
   font-size: 2em;
   display: block;
 }
@@ -113,7 +113,11 @@
     position: absolute; /* Or 'fixed' for viewport-relative positioning */
     z-index: 255;
     visibility: visible;
-    transform: translate(var(--x-distance-to-center), var(--y-distance-to-center)) scale(2);
+    transform: translate(
+        var(--x-distance-to-center),
+        var(--y-distance-to-center)
+      )
+      scale(2);
     transform-origin: center center;
   }
   .cover {

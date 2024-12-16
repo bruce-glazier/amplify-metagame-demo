@@ -105,7 +105,12 @@ export const Carousel = (props: Props) => {
     <div className="carousel" data-testid="carousel-root">
       <div className="carousel-container">
         {groups?.map((group, index) => (
-          <CarouselGroup listItems={group} key={index} classes={groupClass} data-testId={`carousel-group-${index}`}/>
+          <CarouselGroup
+            listItems={group}
+            key={index}
+            classes={groupClass}
+            data-testId={`carousel-group-${index}`}
+          />
         ))}
         <button
           aria-disabled
@@ -116,7 +121,11 @@ export const Carousel = (props: Props) => {
             prevPage();
           }}
         >
-          <Chevron width={'3rem'} height={'3rem'} style={{ transform: 'scaleX(-1)'}}/>
+          <Chevron
+            width={'3rem'}
+            height={'3rem'}
+            style={{ transform: 'scaleX(-1)' }}
+          />
         </button>
         <button
           aria-disabled
@@ -127,7 +136,7 @@ export const Carousel = (props: Props) => {
             nextPage();
           }}
         >
-          <Chevron width={'3rem'} height={'3rem'}/>
+          <Chevron width={'3rem'} height={'3rem'} />
         </button>
       </div>
     </div>

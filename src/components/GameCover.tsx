@@ -19,8 +19,9 @@ export const GameCover = (props: Props) => {
   const isLoading = !game?.name || !game.summary;
   const detailsRef = useRef<HTMLDivElement>(null);
   const screenSize = useScreenSize();
-  const [position, setPosition] = useState(detailsRef.current?.getBoundingClientRect());
-
+  const [position, setPosition] = useState(
+    detailsRef.current?.getBoundingClientRect()
+  );
 
   // Setup listeners to track components current position and size in state
   useEffect(() => {
@@ -40,13 +41,12 @@ export const GameCover = (props: Props) => {
     };
   }, []);
 
-
   // Calculate how far the details card needs to travel to be center in the viewport
   useEffect(() => {
     if (position) {
       // Distance to travel for middle of screen
       const toCenterX = Math.round(
-        screenSize.width / 2 - position.x - (position.width / 2)
+        screenSize.width / 2 - position.x - position.width / 2
       );
 
       // Put bounds on how far the element can travel
@@ -60,7 +60,6 @@ export const GameCover = (props: Props) => {
       const travelingRight = toCenterX > 0;
       const travelingLeft = toCenterX < 0;
 
-
       if (travelingRight && destinationLeftEdge > rightEdge) {
         // if moving right, make sure my new left edge is not beyond my original right position
         xOffset = position.width;
@@ -73,13 +72,19 @@ export const GameCover = (props: Props) => {
 
       // For Y, we just use the center of the screen
       // 0 is top, down is positive, up is negative
-      const toCenterY = Math.round(screenSize.height / 2 - position.y - (position.height / 2))
-      setOffset({ x: xOffset, y: toCenterY })
+      const toCenterY = Math.round(
+        screenSize.height / 2 - position.y - position.height / 2
+      );
+      setOffset({ x: xOffset, y: toCenterY });
     }
   }, [screenSize, position]);
 
   return (
-    <div className="cover-container" ref={detailsRef} data-testId={`game-cover-container-${props?.index}`}>
+    <div
+      className="cover-container"
+      ref={detailsRef}
+      data-testId={`game-cover-container-${props?.index}`}
+    >
       <div
         className={isFocused ? 'cover-details focused' : 'cover-details'}
         aria-label={`${game?.name}`}
@@ -110,22 +115,22 @@ export const GameCover = (props: Props) => {
           <p style={{ color: 'white', fontSize: '22px' }}>Loading</p>
         )}
         <div className="description-container">
-        <h2 className="game-name">{game?.name}</h2>
-        <h5 className="genres">
-          {game?.genres?.map((g) => g?.name).join(' ')}
-        </h5>
-        <h3 className="summary-heading">About this game</h3>
-        <textarea
-          rows={5}
-          className="summary"
-          spellCheck={false}
-          readOnly
-          disabled
-          value={game?.summary ?? ''}
-        />
-        <Link className="learn-more" to={`/details/${game?.slug}`}>
-          Learn more
-        </Link>
+          <h2 className="game-name">{game?.name}</h2>
+          <h5 className="genres">
+            {game?.genres?.map((g) => g?.name).join(' ')}
+          </h5>
+          <h3 className="summary-heading">About this game</h3>
+          <textarea
+            rows={5}
+            className="summary"
+            spellCheck={false}
+            readOnly
+            disabled
+            value={game?.summary ?? ''}
+          />
+          <Link className="learn-more" to={`/details/${game?.slug}`}>
+            Learn more
+          </Link>
         </div>
       </div>
       <div className="cover" aria-label={`${game?.name}`}>

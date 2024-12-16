@@ -42,7 +42,7 @@ export const getGamesQuery = (queryProps: GamesQueryProps) => {
     query = query.concat(`slug = "${queryProps.slug}" & `);
   }
 
-  query = query.concat('artworks != null')
+  query = query.concat('artworks != null');
 
   if (queryProps.rating || queryProps.slug) {
     query = query.concat(';');

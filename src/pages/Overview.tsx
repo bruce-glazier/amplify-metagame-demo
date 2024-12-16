@@ -49,7 +49,7 @@ function Overview() {
           </h3>
           {lowRatedGames?.length && (
             <Carousel
-              data-testId='carousel-2'
+              data-testId="carousel-2"
               listItems={lowRatedGames.map((g, i) => (
                 <GameCover
                   game={g}
