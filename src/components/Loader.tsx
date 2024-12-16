@@ -1,3 +1,4 @@
+import React from 'react';
 import './Loader.css';
 
 type Props = {
@@ -5,5 +6,5 @@ type Props = {
 };
 
 export function Loader(props: Props) {
-  return <div className={props.isLoading ? 'loading' : 'hidden'} />;
+  return <div data-testId='full-page-loader' className={props.isLoading ? 'loading' : 'hidden'} />;
 }

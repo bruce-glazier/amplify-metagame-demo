@@ -8,6 +8,7 @@ import './GameCover.css';
 type Props = {
   game: Schema['Game']['type'] | undefined;
   onLoadComplete?: () => void;
+  'data-testId'?: string;
 };
 
 export const GameCover = (props: Props) => {
@@ -81,7 +82,7 @@ export const GameCover = (props: Props) => {
   }, [screenSize, position]);
 
   return (
-    <div className="cover-container" ref={detailsRef}>
+    <div className="cover-container" ref={detailsRef} data-testId={props['data-testId'] ?? 'game-cover'}>
       <div
         className={isFocused ? 'cover-details focused' : 'cover-details'}
         aria-label={`${game?.name}`}

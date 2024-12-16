@@ -30,16 +30,23 @@ Run `npm run test`
 
 ## Known issues
 
-- On occassion an offscreen image may load the wrong size causing the first row of games to take up more space than expected.
+- On FireFox mobile: Extra whitespace between carousels, seems exclusive to FF mobile, cannot recreate on Chrome Mobile or in responsive on Desktop browser
 
 ## Future improvements
 
+Priority list:
+- Cypress tests (at least one)
+- More unit tests
 - Replace "< " and ">" with SVG arrow for a better look
+- Groom comments, look for last minute cleanup items
 - More content for details page! It is pretty limited.
+
+Stretch goals:
 - Fonts: Default fonts are boring
 - Network Error handling
 - Get text localization-ready
 
+Done: 
 - (DONE) Details preview card does not have a consistent layout across screen sizes
 - (Not doing) Default scrollbars should be replaced with a more appealing scroll
 - (Done) Padding on the details page should be adjusted

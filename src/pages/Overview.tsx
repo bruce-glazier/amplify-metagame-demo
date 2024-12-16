@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { useGames } from '../hooks/useGames';
 import { Carousel } from '../components/Carousel/Carousel';
@@ -30,11 +31,12 @@ function Overview() {
             Highest rated of all time
           </h3>
           <Carousel
-            listItems={topGames?.map((g) => (
+            listItems={topGames?.map((g, i) => (
               <GameCover
                 game={g}
                 key={g.slug}
                 onLoadComplete={() => setIsCarouselOneLoaded(true)}
+                data-testId={`game-cover-${i}`}
               />
             ))}
           />
@@ -47,11 +49,13 @@ function Overview() {
           </h3>
           {lowRatedGames?.length && (
             <Carousel
-              listItems={lowRatedGames.map((g) => (
+              data-testId='carousel-2'
+              listItems={lowRatedGames.map((g, i) => (
                 <GameCover
                   game={g}
                   key={g.slug}
                   onLoadComplete={() => setIsCarouselTwoLoaded(true)}
+                  data-testId={`game-cover-${i}`}
                 />
               ))}
             />

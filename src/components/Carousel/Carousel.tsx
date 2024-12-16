@@ -1,3 +1,4 @@
+import React from 'react';
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { CarouselGroup } from './CarouselGroup';
 import chunk from 'lodash/chunk';

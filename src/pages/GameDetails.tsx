@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { getLargeUri, useGames } from '../hooks/useGames';
 import './GameDetails.css';
