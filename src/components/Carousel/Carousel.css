@@ -27,13 +27,13 @@
 
 /* pageLeft */
 .slide-right {
-  transform: translateX(1%); /* Slide back to the start */
+  transform: translateX(0%); /* Slide back to the start */
   transition: transform 500ms ease-in-out;
 }
 
 /* pageRight */
 .slide-left {
-  transform: translateX(-201%); /* Slide even further left */
+  transform: translateX(-200%); /* Slide even further left */
   transition: transform 500ms ease-in-out;
 }
 

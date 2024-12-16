@@ -26,7 +26,8 @@ Put the amplify_outputs.json file in the root directory.
 
 ## Testing
 
-Run `npm run test`
+Run `npm run test` for unit tests
+Run `npm run e2e` for Cypress tests
 
 ## Known issues
 
@@ -35,9 +36,6 @@ Run `npm run test`
 ## Future improvements
 
 Priority list:
-- Cypress tests (at least one)
-- More unit tests
-- Replace "< " and ">" with SVG arrow for a better look
 - Groom comments, look for last minute cleanup items
 - More content for details page! It is pretty limited.
 
@@ -47,9 +45,12 @@ Stretch goals:
 - Get text localization-ready
 
 Done: 
+- (Not Doing) More unit tests
+- (Done) Cypress tests (at least one)
 - (DONE) Details preview card does not have a consistent layout across screen sizes
 - (Not doing) Default scrollbars should be replaced with a more appealing scroll
 - (Done) Padding on the details page should be adjusted
 - (Not doing) On first page, there is too much empty space / background image is too large on max resolution
 - (Done) On preview details the Y should translate into the viewport preventing cutoff
+- (Done) Replace "< " and ">" with SVG arrow for a better look
 

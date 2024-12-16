@@ -1,3 +1,4 @@
+/// <reference types="vite-plugin-svgr/client" />
 import React from 'react';
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { CarouselGroup } from './CarouselGroup';
@@ -5,6 +6,7 @@ import chunk from 'lodash/chunk';
 import throttle from 'lodash/throttle';
 import './Carousel.css';
 import { useScreenSize } from '../../hooks/useScreenSize';
+import Chevron from './chevron-right.svg?react';
 
 type Props = {
   listItems: JSX.Element[] | undefined;
@@ -114,7 +116,7 @@ export const Carousel = (props: Props) => {
             prevPage();
           }}
         >
-          {leftArrow}
+          <Chevron width={'3rem'} height={'3rem'} style={{ transform: 'scaleX(-1)'}}/>
         </button>
         <button
           aria-disabled
@@ -125,7 +127,7 @@ export const Carousel = (props: Props) => {
             nextPage();
           }}
         >
-          {rightArrow}
+          <Chevron width={'3rem'} height={'3rem'}/>
         </button>
       </div>
     </div>
