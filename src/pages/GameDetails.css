@@ -1,4 +1,4 @@
-.details-container {
+.details-page-container {
   background: #161616;
   touch-action: pan-y; /* Only allow veritcal on mobile */
   overflow-x: hidden;
@@ -10,37 +10,37 @@
 }
 
 @media (max-width: 1080px) {
-  .details-container {
+  .details-page-container {
     font-size: 4vw;
   }
 }
 
 @media (max-width: 1000px) {
-  .details-container {
+  .details-page-container {
     font-size: 2vw;
   }
 }
 
 @media (max-width: 600px) {
-  .details-container {
+  .details-page-container {
     font-size: 4vw;
   }
 }
 
-.details-content {
+.details-page-content {
   min-height: 100vh;
   justify-content: center;
   display: flex;
   flex-direction: column;
 }
 
-.details-container .media-heading {
+.details-page-content .media-heading {
   color: white;
   text-align: center;
   text-shadow: 2px 2px black;
 }
 
-.details-container .videos {
+.details-page-content .videos {
   display: flex;
   flex-wrap: wrap;
   margin-left: 1%;
@@ -48,14 +48,14 @@
   justify-content: center;
 }
 
-.details-container .video {
+.details-page-content .video {
   padding-right: 10px;
 }
 
-.details-container .game-info {
+.details-page-content .game-info {
   border-radius: 8px;
   border: rgb(150, 150, 150) solid 1px;
-  background-color: #0b4ea5ef;
+  background-color: #020202ef;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -64,39 +64,42 @@
   gap: 2%;
 }
 
-.details-container .name,
-.details-container .release-date,
-.details-container .summary {
+.details-page-content .name,
+.details-page-content .release-date,
+.details-page-content .summary {
   color: rgb(255, 255, 255);
   text-shadow: 1px 2px black;
 }
 
 /* Map the child elements to the grid areas */
-.details-container .cover {
+.details-page-content .cover {
   margin: 2%;
   position: relative;
 }
 
-.details-content .cover img {
+.details-page-content .cover img {
   width: 100%;
   max-width: 500px;
   height: auto;
   object-fit: contain;
 }
 
-.details-container .release-date {
+.details-page-content .release-date {
   font-size: 1rem;
   margin: 0;
   text-align: center;
 }
 
-.game-details .summary {
+.details-page-content .summary {
   font-size: 1rem;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  padding: 0 2% 5% 2%;
+  padding-bottom: 1vw;
+  padding: 1vw 1vw 3vw 1vw;
 }
 
-.details-container .name {
+.details-page-content .name {
   font-size: 2rem;
+}
+
+.details-page-content .game-video-iframe {
+  aspect-ratio: 16/9;
 }

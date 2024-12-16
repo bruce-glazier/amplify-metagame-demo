@@ -31,16 +31,18 @@ Run `npm run test`
 ## Known issues
 
 - On occassion an offscreen image may load the wrong size causing the first row of games to take up more space than expected.
-- On preview details the Y should translate into the viewport preventing cutoff
-
 
 ## Future improvements
 
 - Replace "< " and ">" with SVG arrow for a better look
-- Details preview card does not have a consistent layout across screen sizes
-- Default scrollbars should be replaced with a more appealing scroll
-- Padding on the details page should be adjusted
-- On first page, there is too much empty space / background image is too large on max resolution
+- More content for details page! It is pretty limited.
 - Fonts: Default fonts are boring
 - Network Error handling
 - Get text localization-ready
+
+- (DONE) Details preview card does not have a consistent layout across screen sizes
+- (Not doing) Default scrollbars should be replaced with a more appealing scroll
+- (Done) Padding on the details page should be adjusted
+- (Not doing) On first page, there is too much empty space / background image is too large on max resolution
+- (Done) On preview details the Y should translate into the viewport preventing cutoff
+

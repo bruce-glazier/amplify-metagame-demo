@@ -110,21 +110,24 @@ export const GameCover = (props: Props) => {
         {isLoading && (
           <p style={{ color: 'white', fontSize: '22px' }}>Loading</p>
         )}
+        <div className="description-container">
         <h2 className="game-name">{game?.name}</h2>
         <h5 className="genres">
           {game?.genres?.map((g) => g?.name).join(' ')}
         </h5>
         <h3 className="summary-heading">About this game</h3>
         <textarea
+          rows={5}
           className="summary"
           spellCheck={false}
           readOnly
           disabled
           value={game?.summary ?? ''}
-        ></textarea>
+        />
         <Link className="learn-more" to={`/details/${game?.slug}`}>
           Learn more
         </Link>
+        </div>
       </div>
       <div className="cover" aria-label={`${game?.name}`}>
         {!isLoading && game?.cover?.url && (

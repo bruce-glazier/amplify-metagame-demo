@@ -18,7 +18,7 @@ function Overview() {
 
   return (
     <main>
-      <div className="overview-container">
+      <div className="overview-page-container">
         <Loader isLoading={!isCarouselOneLoaded || !isCarouselTwoLoaded} />
         <h1 className="page-title">MetaGames: Discover new games</h1>
         <div style={{ marginLeft: 10, paddingTop: '20%' }}>

@@ -28,15 +28,11 @@ export const Carousel = (props: Props) => {
   }, []);
 
   useLayoutEffect(() => {
-    let groupSize = 4;
+    let groupSize = 4; // between 600-1000
     if (screenSize.width > 1000) {
       groupSize = 8;
     } else if (screenSize.width < 600) {
       groupSize = 2; // keep divisible by number of games
-    }
-
-    if ((listItems ?? []).length < 8) {
-      groupSize = 2;
     }
 
     setGroups(groupItems(listItems, activeGroup, groupSize));

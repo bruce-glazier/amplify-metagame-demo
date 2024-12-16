@@ -3,7 +3,7 @@
 }
 
 /* GameCover styles */
-.cover-container img {
+.cover-container .cover img {
   width: 100%;
   object-fit: cover;
   aspect-ratio: 3 / 4;
@@ -14,9 +14,26 @@
     justify-content: center;
 }
 
+    @media (max-width: 3000px) {
+    .cover-details {
+        font-size: 0.24vw;
+        }
+    }
+  
+  @media (max-width: 1016px) {
+    .cover-details {
+      font-size: 0.52vw;
+    }
+  }
+  
+  @media (max-width: 615px) {
+    .cover-details {
+      font-size: 1vw;
+    }
+  }
+
 .cover-details {
-  height: 40vh;
-  max-width: 40vw;
+  height: 100%;
   aspect-ratio: 4 / 6;
   background-color: rgba(0, 0, 0, 1);
   position: absolute;
@@ -28,63 +45,63 @@
   z-index: 0;
 }
 
-.cover-details img {
-  object-fit: cover;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-}
+.cover-container .cover-details img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+  }
 
-.cover-details .game-name,
-.cover-details .summary-heading {
-  color: white;
-  padding-left: 1rem;
+.cover-details .description-container {
+    max-height: 45%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    color: white;
+    position: 'relative';
 }
 
 .cover-details .game-name {
-  font-size: 0.9rem;
-  line-height: 1.1rem;
-  margin-top: 0;
-  margin-bottom: 1%;
-  max-height: 2.2rem;
+  font-size: 3em;
+  line-height: 1.2em;
+  max-height: 2.4em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
   overflow: hidden;
+  white-space: nowrap; 
+  text-overflow: ellipsis;
 }
 
 .cover-details .genres {
-  font-size: 0.7rem;
+  font-size: 2em;
   line-height: 1;
   margin-top: 0;
-  margin-bottom: 3%;
+  margin-bottom: 1em;
   font-style: italic;
   color: gray;
-  padding-left: 1rem;
 }
 
 .cover-details .summary-heading {
-  font-size: 0.6rem;
+  font-size: 2em;
   margin-top: 0;
-  margin-bottom: 3%;
+  margin-bottom: 0;
 }
 
 .cover-details .summary {
-  font-size: 0.5rem;
-  margin-left: 5%;
-  width: 90%;
-  height: 25%;
+  width: 100%;
+  font-size: 2em;
   color: white;
   overflow-y: scroll;
   resize: none;
   background-color: transparent;
-  border: 1px rgba(255, 255, 255, 0.2) solid;
-  border-radius: 8px;
+  border: none;
   scrollbar-width: thin;
+  margin-bottom: 0.4em;
 }
 
 .cover-details .learn-more {
-  margin-left: 1em;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding-bottom: 5%;
+    position: absolute;
+    bottom: 2em;
+  font-size: 2em;
+  display: block;
 }
 
 .focused {

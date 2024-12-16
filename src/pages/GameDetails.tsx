@@ -14,6 +14,7 @@ function GameDetails() {
     return compact(
       data?.[0]?.videos?.map((v) => (
         <iframe
+          className={'game-video-iframe'}
           key={v?.video_id}
           src={`https://www.youtube.com/embed/${v?.video_id}`}
           frameBorder="0"
@@ -21,7 +22,6 @@ function GameDetails() {
           allowFullScreen
           title={`Video ${v?.video_id}`}
           aria-label={v?.name ?? 'Game Video'}
-          style={{ aspectRatio: '16/9' }}
         />
       ))
     );
@@ -29,21 +29,20 @@ function GameDetails() {
 
   return (
     <div
-      className="details-container"
+      className="details-page-container"
       style={
         { '--game-details-image': `url(${largeUrl})` } as React.CSSProperties
       }
     >
-      <div className="details-content">
+      <div className="details-page-content">
         <div className="game-info">
           <div className="cover">
             <img src={`${getLargeUri(data?.[0]?.cover?.url ?? '')}`}></img>
           </div>
-          <div className="release-date">
-            <div>Released on:</div>
-            {data?.[0]?.release_dates?.[0]?.human}
-          </div>
           <div className="name">{data?.[0]?.name}</div>
+          <div className="release-date">
+            {`Released: ${data?.[0]?.release_dates?.[0]?.human}`}
+          </div>
           <div className="summary">{data?.[0]?.summary}</div>
         </div>
         <h1 className="media-heading">Videos</h1>
