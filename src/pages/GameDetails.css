@@ -1,0 +1,142 @@
+.details-page-container {
+  background: #161616;
+  touch-action: pan-y; /* Only allow veritcal on mobile */
+  overflow-x: hidden;
+  background-image: var(--game-details-image);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  position: relative;
+}
+
+@media (max-width: 1080px) {
+  .details-page-container {
+    font-size: 4vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .details-page-container {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .details-page-container {
+    font-size: 4vw;
+  }
+}
+
+.details-page-content {
+  min-height: 100vh;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-page-content .media-heading {
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px black;
+}
+
+.details-page-content .videos {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1%;
+  margin-right: 1%;
+  justify-content: center;
+}
+
+.details-page-content .video {
+  padding-right: 10px;
+}
+
+.details-page-content .game-info {
+  border-radius: 8px;
+  border: rgb(150, 150, 150) solid 1px;
+  background-color: #100f11f5; /*; */
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 5%;
+  gap: 2%;
+}
+
+.details-page-content .name,
+.details-page-content .release-date,
+.details-page-content .summary,
+.details-page-content .plaforms-heading {
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 2px black;
+}
+
+/* Map the child elements to the grid areas */
+.details-page-content .cover {
+  margin: 2%;
+  position: relative;
+}
+
+.details-page-content .cover img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: contain;
+}
+
+.details-page-content .release-date {
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+}
+
+.details-page-content .summary {
+  font-size: 1rem;
+  padding-bottom: 1vw;
+  padding: 1vw 1vw 3vw 1vw;
+  margin-bottom: 2vw;
+}
+
+.details-page-content .name {
+  font-size: 2rem;
+}
+
+.details-page-content .videos {
+  padding-bottom: 5rem;
+}
+
+.details-page-content .game-video-iframe {
+  aspect-ratio: 16/9;
+}
+
+.details-page-content .platform-logos {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.details-page-content .platform-logo {
+  min-width: 80px;
+  max-width: 100px;
+  border-radius: 8px;
+  border: 3px solid black;
+  margin: 2%;
+  aspect-ratio: 2/1;
+  background-color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.details-page-content .platform-logo-image {
+  object-fit: scale-down;
+  width: 100%;
+  height: 100%;
+}
+
+.details-page-content .site-url {
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 1rem;
+}

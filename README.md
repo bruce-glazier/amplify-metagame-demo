@@ -1,25 +1,33 @@
-## AWS Amplify React+Vite Starter Template
+## Welcome to the MetaGame Demo!
 
-This repository provides a starter template for creating applications using React+Vite and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+This repository leverages AWS Amplify for the backend.
 
 ## Overview
 
-This template equips you with a foundational React application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+The MetaGame site is a visually appealing and enjoyable way to discover new games and learn more about them.
 
-## Features
+## Tech Stack
+- React: As the view layer.
+- Vite: Build tools and development server
+- AWS Amplify: The backend which manages for Auth, GraphQL APIs, 3rd-party service integration.
+- React-Query: For simplifying the network layer, caching data, etc.
+- ViTest/Testing Library: For comprehensive unit tests.
+- Cypress: For E2E tests.
+- Prettier/ESLint: For code formatting and rules.
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+## Local setup:
+1. Put amplify_outputs.json file in the root directory.
+1. `npm install`
+1. `npm run dev`
 
-## Deploying to AWS
+## Tooling
 
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/react/start/quickstart/#deploy-a-fullstack-app-to-aws) of our documentation.
+To run unit tests:  `npm run test`   
+To run Cypress (E2E) tests: `npm run cy:run`   
+To launch Cypress: `npm run cy:open`   
+Run formatting: `npm run format`  
 
-## Security
+## Known issues
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+- On FireFox mobile: Extra whitespace between carousels, seems exclusive to FF mobile, cannot recreate on Chrome Mobile or in responsive on Desktop browser
 
-## License
-
-This library is licensed under the MIT-0 License. See the LICENSE file.

@@ -1,0 +1,22 @@
+.overview-page-container {
+  background: #161616;
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: url('https://images.igdb.com/igdb/image/upload/t_1080p/ar2zis.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
+  padding-bottom: 10%;
+}
+
+.page-title {
+  color: white;
+  padding-left: 5%;
+  padding-top: 5%;
+  font-size: 3vw;
+}
+
+.category-heading {
+  color: white;
+  margin-bottom: 1%;
+}
