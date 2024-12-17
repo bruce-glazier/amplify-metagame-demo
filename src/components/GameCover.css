@@ -113,7 +113,8 @@
   z-index: 0;
 }
 
-.cover-container:hover {
+.cover-container:hover,
+.cover-container:focus-within {
   .cover-details {
     position: absolute; /* Or 'fixed' for viewport-relative positioning */
     z-index: 255;

@@ -3,7 +3,7 @@ import React from 'react';
 type Props = {
   listItems: JSX.Element[] | undefined;
   classes?: string[];
-  'data-testId'?: string;
+  'data-testid'?: string;
 };
 
 export const CarouselGroup = (props: Props) => {
@@ -11,8 +11,9 @@ export const CarouselGroup = (props: Props) => {
 
   return (
     <div
+      tabIndex={-1}
       className={classes?.join(' ')}
-      data-testId={props['data-testId'] ?? 'carousel-group'}
+      data-testid={props['data-testid'] ?? 'carousel-group'}
     >
       {listItems}
     </div>

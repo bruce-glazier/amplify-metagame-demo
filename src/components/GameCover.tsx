@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { Schema } from '../../amplify/data/resource';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useScreenSize } from '../hooks/useScreenSize';
 import { getLargeUri } from '../hooks/useGames';
 import './GameCover.css';
@@ -15,7 +15,6 @@ export const GameCover = (props: Props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const { game } = props;
-
   const isLoading = !game?.name || !game.summary;
   const detailsRef = useRef<HTMLDivElement>(null);
   const screenSize = useScreenSize();
@@ -83,25 +82,19 @@ export const GameCover = (props: Props) => {
     <div
       className="cover-container"
       ref={detailsRef}
-      data-testId={`game-cover-container-${props?.index}`}
+      data-testid={`game-cover-container-${props?.index}`}
+      tabIndex={0}
     >
       <div
-        className={isFocused ? 'cover-details focused' : 'cover-details'}
+        className={'cover-details'}
         aria-label={`${game?.name}`}
-        data-testId={`game-cover-details-${props?.index}`}
+        data-testid={`game-cover-details-${props?.index}`}
         style={
           {
             '--x-distance-to-center': `${offset.x}px`,
             '--y-distance-to-center': `${offset.y}px`,
           } as React.CSSProperties
         }
-        onClick={() => {
-          focus();
-          setIsFocused(true);
-        }}
-        onBlur={() => {
-          setIsFocused(false);
-        }}
       >
         {!isLoading && game?.artworks?.[0]?.url && (
           <img
@@ -128,8 +121,12 @@ export const GameCover = (props: Props) => {
             disabled
             value={game?.summary ?? ''}
           />
-          <Link className="learn-more" to={`/details/${game?.slug}`}>
-            Learn more
+          <Link
+            className="learn-more"
+            to={`/details/${game?.slug}`}
+            tabIndex={0}
+          >
+            More Info
           </Link>
         </div>
       </div>

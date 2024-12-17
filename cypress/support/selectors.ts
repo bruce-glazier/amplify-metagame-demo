@@ -1,15 +1,15 @@
 export const selectors = {
     overviewPage: {
-        carousel: '[data-testId="carousel-root"]',
+        carousel: '[data-testid="carousel-root"]',
         gameCovers: '[data-testid^="game-cover-container-"]',
-        gameCover: (coverIndex: number) => `[data-testId="game-cover-container-${coverIndex}"]`,
-        gameCoverDetails: (coverIndex: number) => `[data-testId="game-cover-details-${coverIndex}"]`,
-        carouselGroup: (groupIndex: number) => `[data-testId="carousel-group-${groupIndex}"]`,
-        nextButton: '[data-testId="next-button"]',
-        backButton: '[data-testId="prev-button"]',
+        gameCover: (coverIndex: number) => `[data-testid="game-cover-container-${coverIndex}"]`,
+        gameCoverDetails: (coverIndex: number) => `[data-testid="game-cover-details-${coverIndex}"]`,
+        carouselGroup: (groupIndex: number) => `[data-testid="carousel-group-${groupIndex}"]`,
+        nextButton: '[data-testid="next-button"]',
+        backButton: '[data-testid="prev-button"]',
     },
     detailsPage: {
-        container: '[data-testId="details-page-container"]'
+        container: '[data-testid="details-page-container"]'
     },
-    fullPageLoader: '[data-testId="full-page-loader"]',
+    fullPageLoader: '[data-testid="full-page-loader"]',
 }

@@ -21,7 +21,6 @@ export const Carousel = (props: Props) => {
   );
   const [isTransitioning, setIsTransitioning] = useState(false);
   const screenSize = useScreenSize();
-
   const [isMobile, setIsMobile] = useState(false);
 
   // TODO: This only works within the carousel, I'd prefer to do this if the browser is tapped anywhere
@@ -109,7 +108,7 @@ export const Carousel = (props: Props) => {
             listItems={group}
             key={index}
             classes={groupClass}
-            data-testId={`carousel-group-${index}`}
+            data-testid={`carousel-group-${index}`}
           />
         ))}
         <button
