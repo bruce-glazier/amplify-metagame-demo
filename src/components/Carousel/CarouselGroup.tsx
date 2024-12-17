@@ -11,7 +11,7 @@ export const CarouselGroup = (props: Props) => {
 
   return (
     <div
-    tabIndex={-1}
+      tabIndex={-1}
       className={classes?.join(' ')}
       data-testid={props['data-testid'] ?? 'carousel-group'}
     >

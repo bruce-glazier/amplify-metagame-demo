@@ -89,17 +89,20 @@ export const GameCover = (props: Props) => {
         className={'cover-details'}
         aria-label={`${game?.name}`}
         data-testid={`game-cover-details-${props?.index}`}
-        style={{
-          '--x-distance-to-center': `${offset.x}px`,
-          '--y-distance-to-center': `${offset.y}px`,
-        } as React.CSSProperties}
+        style={
+          {
+            '--x-distance-to-center': `${offset.x}px`,
+            '--y-distance-to-center': `${offset.y}px`,
+          } as React.CSSProperties
+        }
       >
         {!isLoading && game?.artworks?.[0]?.url && (
           <img
             draggable={false}
             src={getLargeUri(game?.artworks?.[0]?.url)}
             onLoad={props.onLoadComplete}
-            aria-disabled />
+            aria-disabled
+          />
         )}
         {isLoading && (
           <p style={{ color: 'white', fontSize: '22px' }}>Loading</p>
@@ -116,8 +119,13 @@ export const GameCover = (props: Props) => {
             spellCheck={false}
             readOnly
             disabled
-            value={game?.summary ?? ''} />
-          <Link className="learn-more" to={`/details/${game?.slug}`} tabIndex={0}>
+            value={game?.summary ?? ''}
+          />
+          <Link
+            className="learn-more"
+            to={`/details/${game?.slug}`}
+            tabIndex={0}
+          >
             More Info
           </Link>
         </div>
@@ -128,7 +136,8 @@ export const GameCover = (props: Props) => {
             draggable={false}
             src={getLargeUri(game.cover.url)}
             onLoad={props.onLoadComplete}
-            aria-disabled />
+            aria-disabled
+          />
         )}
         {isLoading && (
           <p style={{ color: 'white', fontSize: '22px' }}>Loading</p>

@@ -109,11 +109,12 @@
   display: block;
 }
 
-.focused {  
+.focused {
   z-index: 0;
 }
 
-.cover-container:hover, .cover-container:focus-within {
+.cover-container:hover,
+.cover-container:focus-within {
   .cover-details {
     position: absolute; /* Or 'fixed' for viewport-relative positioning */
     z-index: 255;

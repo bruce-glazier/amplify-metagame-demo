@@ -79,7 +79,9 @@ function GameDetails() {
           <h1 className="media-heading">Videos</h1>
           <div className="videos">
             {listItems().map((IFRAME, i) => (
-              <div className="video" key={`video-wrapper-${i}`}>{IFRAME}</div>
+              <div className="video" key={`video-wrapper-${i}`}>
+                {IFRAME}
+              </div>
             ))}
           </div>
         </div>
