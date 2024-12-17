@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {
-  getLargeUri,
-  getLargeUriAsPng,
-  useGames,
-} from '../hooks/useGames';
+import { getLargeUri, getLargeUriAsPng, useGames } from '../hooks/useGames';
 import './GameDetails.css';
 import { useCallback } from 'react';
 import compact from 'lodash/compact';
@@ -42,7 +38,7 @@ function GameDetails() {
         style={
           { '--game-details-image': `url(${largeUrl})` } as React.CSSProperties
         }
-        data-testId="details-page-container"
+        data-testid="details-page-container"
       >
         <div className="details-page-content">
           <div className="game-info">
@@ -57,14 +53,19 @@ function GameDetails() {
               {`Released: ${data?.[0]?.release_dates?.[0]?.human}`}
             </div>
             <div className="summary">{data?.[0]?.summary}</div>
-            {data?.[0]?.websites?.[0]?.url && <Link to={data[0].websites[0].url} className="site-url">Visit Site</Link>}
+            {data?.[0]?.websites?.[0]?.url && (
+              <Link to={data[0].websites[0].url} className="site-url">
+                Visit Site
+              </Link>
+            )}
             <div className="plaforms-heading">Available On</div>
             <div className="platform-logos">
-              {data?.[0].platforms?.map((p) => {
+              {data?.[0].platforms?.map((p, i) => {
                 if (p?.platform_logo?.alpha_channel) {
                   return (
-                    <div className="platform-logo">
+                    <div className="platform-logo" key={`logo-${i}`}>
                       <img
+                        key={`image-${i}`}
                         aria-label={p.name ?? 'Platform Image'}
                         className="platform-logo-image"
                         src={getLargeUriAsPng(p?.platform_logo?.url ?? '')}
@@ -77,8 +78,8 @@ function GameDetails() {
           </div>
           <h1 className="media-heading">Videos</h1>
           <div className="videos">
-            {listItems().map((IFRAME) => (
-              <div className="video">{IFRAME}</div>
+            {listItems().map((IFRAME, i) => (
+              <div className="video" key={`video-wrapper-${i}`}>{IFRAME}</div>
             ))}
           </div>
         </div>
