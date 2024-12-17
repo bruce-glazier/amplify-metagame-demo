@@ -31,7 +31,7 @@ export const useGames = (queryProps: GamesQueryProps) =>
 
 export const getGamesQuery = (queryProps: GamesQueryProps) => {
   let query =
-    'fields *, artworks.*, platforms.platform_logo.url, platforms.platform_logo.alpha_channel, cover.*, genres.name, release_dates.*, multiplayer_modes.*, videos.*, websites.*; sort rating_count desc; limit 16; where ';
+    'fields *, artworks.*, platforms.platform_logo.url, platforms.name, platforms.platform_logo.alpha_channel, cover.*, genres.name, release_dates.*, multiplayer_modes.*, videos.*, websites.*, websites.platform; sort rating_count desc; limit 16; where ';
 
   if (queryProps.rating) {
     const { rating, rating_type } = queryProps.rating;

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getLargeUri, getLargeUriAsPng, useGames } from '../hooks/useGames';
+import {
+  getLargeUri,
+  getLargeUriAsPng,
+  useGames,
+} from '../hooks/useGames';
 import './GameDetails.css';
 import { useCallback } from 'react';
 import compact from 'lodash/compact';
@@ -55,10 +59,18 @@ function GameDetails() {
             <div className="summary">{data?.[0]?.summary}</div>
             {data?.[0]?.websites?.[0]?.url && <Link to={data[0].websites[0].url} className="site-url">Visit Site</Link>}
             <div className="plaforms-heading">Available On</div>
-            <div className='platform-logos'>
+            <div className="platform-logos">
               {data?.[0].platforms?.map((p) => {
                 if (p?.platform_logo?.alpha_channel) {
-                  return <div className='platform-logo'><img className='platform-logo-image' src={getLargeUriAsPng(p?.platform_logo?.url ?? '')} /></div>
+                  return (
+                    <div className="platform-logo">
+                      <img
+                        aria-label={p.name ?? 'Platform Image'}
+                        className="platform-logo-image"
+                        src={getLargeUriAsPng(p?.platform_logo?.url ?? '')}
+                      />
+                    </div>
+                  );
                 }
               })}
             </div>

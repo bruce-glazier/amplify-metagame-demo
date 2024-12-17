@@ -60,7 +60,7 @@ const schema = a.schema({
           human: a.string().required(),
         }),
     website: a.customType({
-      category: a.ref('platform'),
+      category: a.integer(),
       url: a.string().required(),
     }),
     multiplayer_modes: a.customType({
@@ -68,8 +68,8 @@ const schema = a.schema({
       offlinecoop: a.boolean(),
       onlinemax: a.integer(),
     }),
-    platform: a.enum(['official', 'wikia', 'wikipedia', 'facebook', 'twitter', 'twitch', 'instagram', 'youtube', 'iphone', 'ipad', 'android', 'steam', 'itch', 'epicgames', 'gog', 'discord']),
     platforms: a.customType({
+      name: a.string(),
       platform_logo: a.customType({
         url: a.string(),
         alpha_channel: a.boolean(),
