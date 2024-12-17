@@ -20,12 +20,17 @@ The MetaGame site is a visually appealing and enjoyable way to discover new game
 1. `npm install`
 1. `npm run dev`
 
-## Tooling
+## Lint
+
+Run formatting: `npm run format`
+
+## Tests
 
 To run unit tests:  `npm run test`   
 To run Cypress (E2E) tests: `npm run cy:run`   
-To launch Cypress: `npm run cy:open`   
-Run formatting: `npm run format`  
+To launch Cypress: `npm run cy:open`      
+
+Note: Be sure the dev server is running to use Cypress
 
 ## Known issues
 
